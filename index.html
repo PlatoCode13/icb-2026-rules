@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ICB 2026 Rules</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@500..800&family=Hind+Siliguri:wght@400;500;600;700&display=swap">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+/* VOICE  match-day briefing: bold, clear, sporty, very little text
+   IDEA   Indoor Cricket Blast at night: floodlit arena, orange glow, green and white
+   PICTURE one animated scene per key rule: bowling box with footprints, keeper box, bowler and batter, bounce
+   COLOUR night arena ground, orange lead, green for Fair, red for No-ball, white ball
+   TYPE   Anek Bangla display + Hind Siliguri text
+   LAYOUT one rule idea per slide; swipe/arrow deck; rule chips open the rulebook text */
+:root{color-scheme:dark;--bg:#0b0d10;--bg2:#0e1114;--panel:#161a1f;--panel2:#1c2128;--line:#2a313a;--ink:#fffaf2;--soft:#c9c6bf;--mute:#8f918f;--or:#ff7a1a;--am:#ffb020;--gr:#3ddc5a;--gr2:#149a3c;--red:#ff3b30;--fs:clamp(16px,1.1vw + 0.8vh,30px);--fs-h:clamp(28px,3vw + 1.2vh,72px);--fs-big:clamp(40px,5vw + 2vh,120px);--fs-s:clamp(13px,0.7vw + 0.6vh,21px)}
+*{box-sizing:border-box;min-width:0}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 var(--fs)/1.5 'Hind Siliguri',system-ui,sans-serif;overflow:hidden}
+button{font:inherit;color:inherit}
+.deck{display:flex;height:calc(100% - 60px);overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
+.deck::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;height:100%;overflow-y:auto;scroll-snap-align:start;scroll-snap-stop:always;display:flex;position:relative;background:radial-gradient(70% 40% at 50% 112%,#ff7a1a26,transparent 70%),radial-gradient(35% 30% at 96% -4%,#ffb0201c,transparent 70%),radial-gradient(35% 30% at 4% -4%,#ffffff10,transparent 70%),var(--bg)}
+.slide.alt{background:radial-gradient(70% 40% at 50% 112%,#3ddc5a1a,transparent 70%),radial-gradient(35% 30% at 96% -4%,#ffffff10,transparent 70%),radial-gradient(35% 30% at 4% -4%,#ffb0201c,transparent 70%),var(--bg2)}
+.in{margin:auto;width:min(1440px,100%);padding:clamp(20px,4.5vh,64px) clamp(16px,4.5vw,80px)}
+.hd{margin-bottom:clamp(14px,3vh,40px);display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
+.sec{flex-basis:100%;font:600 var(--fs-s)/1.2 'Anek Bangla',sans-serif;color:var(--or);margin:0}
+h1,h2,h3{font-family:'Anek Bangla','Hind Siliguri',sans-serif;margin:0;text-wrap:balance}
+h2{font-size:var(--fs-h);font-weight:750;line-height:1.06;letter-spacing:-.01em}
+h3{font-size:1.2em;font-weight:700;line-height:1.2}
+p{margin:0}
+.soft{color:var(--soft)}
+.big{font:800 var(--fs-big)/1 'Anek Bangla',sans-serif;background:linear-gradient(180deg,#ffd27a,var(--am) 40%,var(--or));-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:20px;padding:clamp(16px,2vw,30px);display:flex;flex-direction:column;gap:.5em}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,1.6vw,24px)}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,24px)}
+.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.4vw,20px)}
+.split{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(18px,2.6vw,48px);align-items:center}
+.col{display:flex;flex-direction:column;gap:clamp(10px,1.6vh,20px)}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.rule{font:600 var(--fs-s)/1 'Anek Bangla',sans-serif;color:var(--soft);background:#ffffff08;border:1px solid var(--line);border-radius:999px;padding:.45em .8em .35em;cursor:pointer;white-space:nowrap;vertical-align:middle;transition:border-color .2s,color .2s}
+.rule:hover,.rule:focus-visible{border-color:var(--or);color:var(--ink);outline:none}
+.tag{font:700 var(--fs-s)/1 'Anek Bangla',sans-serif;padding:.5em .9em .4em;border-radius:999px;background:var(--am);color:#1b1208;white-space:nowrap;align-self:flex-start}
+.pill{font:700 .85em/1.1 'Anek Bangla',sans-serif;padding:.45em .9em .35em;border-radius:999px;white-space:nowrap;align-self:flex-start}
+.ok{background:var(--gr);color:#06200d}
+.no{background:var(--red);color:#fff}
+.warn{background:var(--am);color:#1b1208}
+.li{display:flex;gap:.8em;align-items:flex-start}
+.n{flex:none;width:1.8em;height:1.8em;border-radius:50%;display:grid;place-items:center;font:700 .8em/1 'Anek Bangla',sans-serif;background:var(--or);color:#1b0a05;margin-top:.15em}
+svg text{font-family:'Anek Bangla','Hind Siliguri',sans-serif;paint-order:stroke;stroke:#0b0d10;stroke-width:5px;stroke-linejoin:round}
+/* cover */
+.cover .in{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,4vw,64px);align-items:center}
+.cover h1{font-size:clamp(48px,6.4vw,140px);font-weight:800;line-height:.95;letter-spacing:-.02em}
+.cover h1 span{background:linear-gradient(180deg,#ffd27a,var(--am) 40%,var(--or));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ctitle{font:700 clamp(22px,2.4vw,52px)/1.1 'Anek Bangla',sans-serif;margin:.3em 0 .8em}
+.hero{width:100%;aspect-ratio:1370/1148;border-radius:26px;background:url(hero.webp) center/cover no-repeat;box-shadow:0 0 0 1px #ffffff14,0 30px 80px -20px #ff7a1a55}
+.hint{margin-top:1.4em;color:var(--mute);font-size:var(--fs-s)}
+.badge{width:36px;height:36px;border-radius:10px;background:url(badge.webp) center/cover no-repeat;flex:none}
+/* contents */
+.tile{cursor:pointer;text-align:left;transition:border-color .2s,transform .2s}
+.tile:hover,.tile:focus-visible{border-color:var(--or);transform:translateY(-3px);outline:none}
+.tnum{font:800 1.6em/1 'Anek Bangla',sans-serif;color:var(--or)}
+/* squad */
+.dots{display:grid;grid-template-columns:repeat(3,auto);gap:clamp(8px,1vw,16px);justify-content:start}
+.dot{width:clamp(48px,5.2vw,100px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;font:700 1.1em/1 'Anek Bangla',sans-serif;background:linear-gradient(160deg,#1f3a27,#14231a);border:2px solid #2f5a3a}
+.ssb{width:clamp(80px,8vw,150px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;text-align:center;background:linear-gradient(160deg,var(--am),var(--or));color:#1b1208;font:800 .95em/1.1 'Anek Bangla',sans-serif}
+.plus{font:800 2.2em/1 'Anek Bangla',sans-serif;color:var(--mute)}
+/* groups */
+.grp{display:flex;flex-direction:column;gap:8px}
+.slot{display:flex;gap:.8em;align-items:center;padding:.45em .9em;border-radius:12px;border:1px solid var(--line);color:var(--mute)}
+.slot b{font-family:'Anek Bangla',sans-serif;width:2.2em;color:var(--soft)}
+.slot.q{background:linear-gradient(90deg,#3ddc5a2e,#3ddc5a0a);border-color:#3ddc5a66;color:var(--ink)}
+.slot.q b{color:var(--gr)}
+/* bracket */
+.br{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,72px);align-items:stretch}
+.brc{display:flex;flex-direction:column;gap:clamp(14px,2.4vh,28px)}
+.brh{font:700 var(--fs-s)/1 'Anek Bangla',sans-serif;color:var(--or);margin-bottom:4px}
+.pair{position:relative;display:flex;flex-direction:column;gap:clamp(8px,1.4vh,14px);flex:1;justify-content:center}
+.pair::after{content:'';position:absolute;right:calc(-1 * clamp(14px,2vw,36px));top:25%;bottom:25%;width:clamp(14px,2vw,36px);border:2px solid var(--line);border-left:0;border-radius:0 12px 12px 0}
+.m{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:.6em 1em;display:flex;gap:.8em;align-items:center}
+.m small{font:700 var(--fs-s)/1 'Anek Bangla',sans-serif;color:var(--mute)}
+.m b{font:700 1.15em/1.1 'Anek Bangla',sans-serif}
+.m.fin{background:linear-gradient(160deg,var(--am),var(--or));color:#1b1208;border:0;flex-direction:column;align-items:flex-start;padding:1em 1.2em}
+.m.fin small{color:#3b2408}
+.sfcol{justify-content:space-around}
+/* gauge, time, overs */
+.gauge{display:flex;height:clamp(48px,7vh,80px);border-radius:16px;overflow:hidden;font:700 1em/1 'Anek Bangla',sans-serif}
+.gauge .a1{flex:58;background:var(--gr);color:#06200d;display:flex;align-items:center;padding:0 1em}
+.gauge .a2{flex:20;background:var(--red);color:#fff;display:flex;align-items:center;padding:0 1em;white-space:nowrap}
+.tbar{height:clamp(40px,6vh,64px);border-radius:999px;background:var(--panel);border:1px solid var(--line);overflow:hidden}
+.tfill{height:100%;width:100%;background:linear-gradient(90deg,var(--or),var(--am));transform-origin:left;display:flex;align-items:center;padding:0 1em;font:700 var(--fs-s)/1 'Anek Bangla',sans-serif;color:#1b0a05}
+.overs{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:clamp(4px,.8vw,12px)}
+.ov{border-radius:12px;padding:.6em .2em;text-align:center;display:flex;flex-direction:column;gap:2px;font-size:var(--fs-s)}
+.ov b{font:800 1.6em/1 'Anek Bangla',sans-serif}
+.ov.sq{background:linear-gradient(160deg,var(--am),var(--or));color:#1b1208}
+.ov.alt{border:2px dashed var(--line);color:var(--mute)}
+/* reveal + answer */
+.reveal,.replay{align-self:flex-start;border:0;border-radius:999px;padding:.6em 1.2em .5em;background:var(--ink);color:var(--bg);font:700 var(--fs-s)/1 'Anek Bangla',sans-serif;cursor:pointer;min-height:44px}
+.res{font:800 clamp(30px,3vw,64px)/1.05 'Anek Bangla',sans-serif;color:var(--am)}
+.answer{background:linear-gradient(160deg,var(--am),var(--or));color:#1b1208;border:0}
+.answer .res{color:#1b1208}
+/* scenes */
+.scene{position:relative;border-radius:22px;overflow:hidden;background:#090c0f;border:1px solid var(--line)}
+.scene svg{display:block;width:100%;height:auto;max-height:58vh}
+.stamp{position:absolute;right:12px;top:12px;font:800 clamp(16px,1.4vw,28px)/1.1 'Anek Bangla',sans-serif;padding:.45em .9em .35em;border-radius:12px;opacity:0;transform:scale(.7) rotate(-4deg);transition:opacity .25s,transform .35s cubic-bezier(.2,1.6,.4,1);pointer-events:none;max-width:70%;text-align:right}
+.stamp.show{opacity:1;transform:none}
+.stamp.ok{background:var(--gr);color:#06200d}.stamp.no{background:var(--red);color:#fff}.stamp.warn{background:var(--am);color:#1b1208}
+.modes{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.modes button{min-height:44px;border-radius:999px;border:1px solid var(--line);background:var(--panel);padding:.45em 1em .35em;font:600 var(--fs-s)/1.1 'Anek Bangla',sans-serif;cursor:pointer}
+.modes button:hover,.modes button:focus-visible{border-color:var(--or);outline:none}
+.modes button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tl{position:relative;height:10px;border-radius:5px;margin:16px 4px 4px;background:linear-gradient(90deg,#ffffff22 50%,#3ddc5a55 50%)}
+.tl i{position:absolute;top:-6px;width:22px;height:22px;border-radius:50%;background:var(--ink);left:0;transform:translateX(-50%);box-shadow:0 0 0 4px #0009}
+.tl b{position:absolute;left:50%;top:-10px;bottom:-10px;width:3px;background:var(--am);transform:translateX(-50%)}
+.tll{display:flex;justify-content:space-between;font:600 var(--fs-s)/1.2 'Anek Bangla',sans-serif;color:var(--soft);margin-top:10px}
+.fp ellipse{fill:#fffaf2}
+.fp.bad ellipse{fill:var(--red)}
+.fp.good ellipse{fill:var(--gr)}
+.teams{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(10px,1.4vw,22px)}
+.team{margin:0;display:flex;flex-direction:column;align-items:center;gap:.5em;text-align:center}
+.team img{width:100%;max-width:min(170px,17vh);aspect-ratio:1;height:auto;object-fit:cover;border-radius:22px;box-shadow:0 0 0 1px #ffffff1a,0 16px 40px -18px #ff7a1a88;background:#111}
+.team figcaption{font:600 var(--fs-s)/1.2 'Anek Bangla',sans-serif;color:var(--soft)}
+.slide.on .team.a{animation:popin .55s cubic-bezier(.2,1.5,.4,1) both;animation-delay:calc(var(--d,0) * 70ms)}
+@keyframes popin{from{opacity:0;transform:scale(.6) rotate(-6deg)}to{opacity:1;transform:none}}
+.surprise{margin-top:clamp(12px,2vh,22px);flex-direction:row;align-items:center;flex-wrap:wrap;gap:.4em 1.2em}
+.surprise .res{font-size:var(--fs-big)}
+@media (max-width:900px){.teams{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:600px){.teams{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.modes .replay{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+@media (max-width:600px){.stamp{font-size:13px;max-width:86%}}
+.team figcaption{display:flex;flex-direction:column;gap:2px;font:500 var(--fs-s)/1.2 'Hind Siliguri',sans-serif;color:var(--mute)}
+.team figcaption b{font:700 var(--fs-s)/1.15 'Anek Bangla',sans-serif;color:var(--ink)}
+.team time{color:var(--am);font:700 var(--fs-s)/1.2 'Anek Bangla',sans-serif}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(10px,1.4vw,20px)}
+.fact{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:20px;padding:clamp(14px,1.6vw,24px);display:flex;flex-direction:column;gap:.4em}
+.fact .big{font-size:clamp(30px,3vw + 1vh,72px)}
+.fact p{color:var(--soft);font-size:.9em}
+.clockrow{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.clock{font:800 clamp(32px,3.4vw,72px)/1 'Anek Bangla',sans-serif;font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap}
+.clock small{font-size:.5em;color:var(--mute)}
+.slots{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(6px,.8vw,12px);margin:clamp(10px,2vh,22px) 0}
+.sl{aspect-ratio:1;border-radius:14px;border:2px dashed var(--line);display:grid;place-items:center;font:700 var(--fs-s)/1 'Anek Bangla',sans-serif;color:var(--mute);position:relative;overflow:hidden}
+.sl img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(.4) rotate(-10deg);transition:opacity .35s,transform .45s cubic-bezier(.2,1.6,.4,1)}
+.sl.on{border:2px solid var(--gr)}
+.sl.on img{opacity:1;transform:none}
+.rctl{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.rctl input{flex:1;min-width:140px;accent-color:var(--or);height:44px}
+.rctl .replay{align-self:center}
+.faq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(10px,1.2vw,18px)}
+.faq details{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:0}
+.faq summary{list-style:none;cursor:pointer;padding:clamp(12px,1.4vw,20px) clamp(14px,1.6vw,24px);font:700 1em/1.3 'Anek Bangla',sans-serif;display:flex;gap:.7em;align-items:flex-start;min-height:44px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:'+';flex:none;width:1.5em;height:1.5em;border-radius:50%;display:grid;place-items:center;background:var(--or);color:#1b0a05;font-weight:800;line-height:1}
+.faq details[open] summary::before{content:'−';background:var(--gr);color:#06200d}
+.faq details[open]{border-color:#3ddc5a66}
+.faq .ans{padding:0 clamp(14px,1.6vw,24px) clamp(12px,1.4vw,20px) calc(clamp(14px,1.6vw,24px) + 2.2em);color:var(--soft);display:flex;flex-wrap:wrap;gap:.5em .8em;align-items:center}
+.year{position:absolute;left:50%;bottom:4%;transform:translateX(-50%);font:800 clamp(34px,5vw,92px)/1 'Anek Bangla',sans-serif;letter-spacing:.04em;background:linear-gradient(180deg,#fff 0%,#ffd27a 45%,var(--or) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 14px #000c)}
+.hero{position:relative}
+@media (max-width:900px){.faq{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:600px){:root{--fs-big:clamp(30px,9vw,52px)}.g3.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.g3.stats .card{padding:14px}.facts{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.slots{grid-template-columns:repeat(4,minmax(0,1fr))}.hd{gap:8px 10px}}
+/* bar */
+.bar{position:fixed;left:0;right:0;bottom:0;height:60px;display:flex;align-items:center;gap:10px;padding:0 max(12px,2vw);background:#08090bee;border-top:1px solid var(--line)}
+.prog{position:absolute;left:0;top:-1px;height:3px;background:linear-gradient(90deg,var(--gr),var(--am),var(--or));width:0;transition:width .4s}
+.brand{display:flex;align-items:center;gap:10px;font:700 var(--fs-s)/1 'Anek Bangla',sans-serif;color:var(--soft);margin-right:auto;white-space:nowrap;overflow:hidden}
+.nb{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--panel);cursor:pointer;display:grid;place-items:center}
+.nb:hover,.nb:focus-visible{border-color:var(--or);outline:none}
+.nb svg{width:20px;height:20px}
+.cnt{font:600 var(--fs-s)/1 'Anek Bangla',sans-serif;color:var(--soft);min-width:4.5em;text-align:center}
+/* popover */
+.pop{position:fixed;inset:0;background:#000a;display:grid;place-items:center;padding:16px;z-index:9}
+.pop[hidden]{display:none}
+.pc{width:min(680px,100%);max-height:80vh;overflow:auto;background:#fffaf2;color:#16130f;border-radius:22px;padding:clamp(20px,3vw,36px);position:relative;box-shadow:0 20px 60px #000a}
+.pc .ps{font:600 var(--fs-s)/1.2 'Anek Bangla',sans-serif;color:#c4520a}
+.pc h3{font-size:clamp(24px,2vw,36px);margin:.2em 0 .6em}
+.pc .rt{font:500 clamp(16px,1.1vw,22px)/1.55 'Hind Siliguri',sans-serif;margin:0 0 .9em;white-space:pre-line}
+.pc .cl{border-top:1px solid #e6dccc;padding-top:.9em;margin-top:.4em}
+.pc .cl b{display:block;font:700 var(--fs-s)/1.2 'Anek Bangla',sans-serif;color:#117a32;margin-bottom:.3em}
+.x{position:absolute;right:12px;top:12px;width:44px;height:44px;border-radius:50%;border:0;background:#efe4d3;cursor:pointer;font-size:24px;line-height:1}
+/* motion */
+.js .slide .a{opacity:0}
+.slide.on .a{animation:up .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--d,0) * 90ms)}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.js .frag{opacity:0;transform:translateY(14px);transition:opacity .45s,transform .45s;pointer-events:none}
+.frag.shown{opacity:1;transform:none;pointer-events:auto}
+.slide.on .tfill{animation:grow 1.6s .3s cubic-bezier(.3,.6,.2,1) both}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){.js .slide .a{opacity:1}.slide.on .a,.slide.on .tfill{animation:none}.deck{scroll-behavior:auto}}
+@media (max-height:780px){:root{--fs-big:clamp(36px,4vw + 1.5vh,96px)}.slot{padding:.3em .9em}.grp{gap:6px}.scene svg{max-height:52vh}}
+@media (max-width:900px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.split,.cover .in{grid-template-columns:minmax(0,1fr)}.cover .hero{order:-1}}
+@media (max-width:600px){.g2,.g3{grid-template-columns:minmax(0,1fr)}.br{grid-template-columns:minmax(0,1fr);gap:18px}.pair::after{display:none}.overs{grid-template-columns:repeat(5,minmax(0,1fr))}.brand span{display:none}.in{padding-bottom:28px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<radialGradient id="ballg" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#ffffff"/><stop offset=".7" stop-color="#e9e6df"/><stop offset="1" stop-color="#b9b4aa"/></radialGradient>
+<g id="batterG">
+<path d="M10 -140 L16 -72 L20 -8" stroke="#f4f1ea" stroke-width="26" stroke-linecap="round" fill="none"/>
+<path d="M-6 -140 L-22 -72 L-30 -8" stroke="#f4f1ea" stroke-width="26" stroke-linecap="round" fill="none"/>
+<path d="M-34 -110 L-14 -106 M-38 -86 L-18 -82 M2 -110 L22 -108 M4 -86 L24 -84" stroke="#c9c2b3" stroke-width="3"/>
+<ellipse cx="-38" cy="-7" rx="20" ry="8" fill="#111"/><ellipse cx="26" cy="-7" rx="18" ry="8" fill="#111"/>
+<path d="M-20 -140 C-28 -180 -26 -222 -16 -246 L22 -246 C30 -220 28 -180 22 -140 Z" fill="#2b6fe0"/>
+<path d="M-22 -200 L27 -214 L28 -203 L-23 -189 Z" fill="#ffb020"/>
+<rect x="-8" y="-262" width="14" height="18" fill="#c68b5e"/>
+<circle cx="-2" cy="-274" r="22" fill="#c68b5e"/>
+<path d="M-27 -274 C-27 -306 23 -310 25 -276 L25 -264 L-4 -266 Z" fill="#10203d"/>
+<path d="M-27 -272 L-33 -252 M-24 -262 L-34 -262 M-27 -252 L-33 -252" stroke="#a9b3bd" stroke-width="3"/>
+<path d="M10 -238 L0 -196 L-12 -152" stroke="#2b6fe0" stroke-width="14" stroke-linecap="round" fill="none"/>
+<path d="M-12 -236 L-26 -196 L-14 -152" stroke="#2b6fe0" stroke-width="14" stroke-linecap="round" fill="none"/>
+<circle cx="-12" cy="-150" r="10" fill="#f4f1ea"/>
+</g>
+<g id="batG"><rect x="-3" y="0" width="6" height="28" rx="2" fill="#161616"/><rect x="-8" y="26" width="16" height="98" rx="5" fill="#e7c27d"/><rect x="-8" y="26" width="5" height="98" rx="2" fill="#c99d52"/></g>
+<g id="stumpsSide"><rect x="-3" y="-80" width="6" height="80" fill="#e8c98a"/><rect x="5" y="-80" width="6" height="80" fill="#d8b571"/><rect x="-11" y="-80" width="6" height="80" fill="#f0d59d"/><rect x="-13" y="-84" width="26" height="4" rx="2" fill="#ffb020"/></g>
+</defs></svg>
+
+<main class="deck" id="deck">
+
+<section class="slide cover" id="start">
+<div class="in">
+<div>
+<p class="sec a" style="font-size:clamp(14px,1.2vw,24px)">Indoor Cricket Blast</p>
+<h1 class="a"><span>ICB 2026</span></h1>
+<p class="ctitle a" style="--d:1">Official Rules — এক নজরে</p>
+<p class="soft a" style="--d:2">২৬–২৭ ডিসেম্বর ২০২৬ · Harburg, Hamburg · ১২টি দল</p>
+<p class="hint a" style="--d:3">→ চাপুন বা swipe করুন। <span class="rule" style="pointer-events:none">Rule 1.1</span> এমন চিহ্নে tap করলে rulebook-এর মূল নিয়ম দেখাবে।</p>
+</div>
+<div class="hero a" style="--d:1" role="img" aria-label="Indoor Cricket Blast 2026 logo"><span class="year">2026</span></div>
+</div>
+</section>
+
+<section class="slide alt" id="contents">
+<div class="in">
+<div class="hd"><p class="sec a">সূচি</p><h2 class="a" style="--d:1">যা যা দেখব</h2></div>
+<div class="g4">
+<button class="card tile a" style="--d:2" data-go="tournament"><span class="tnum">01</span><h3>টুর্নামেন্ট ও দল</h3></button>
+<button class="card tile a" style="--d:3" data-go="groups"><span class="tnum">02</span><h3>Format</h3></button>
+<button class="card tile a" style="--d:4" data-go="batting"><span class="tnum">03</span><h3>Batting ও Out</h3><span class="tag">8.7 Clarified</span></button>
+<button class="card tile a" style="--d:5" data-go="bowling"><span class="tnum">04</span><h3>Bowling ও No-ball</h3><span class="tag">Action Clarified</span></button>
+<button class="card tile a" style="--d:6" data-go="fielding"><span class="tnum">05</span><h3>Fielding</h3><span class="tag">6.4 Clarified</span></button>
+<button class="card tile a" style="--d:7" data-go="supersub"><span class="tnum">06</span><h3>Super Sub</h3></button>
+<button class="card tile a" style="--d:8" data-go="review"><span class="tnum">07</span><h3>Review ও সময়</h3></button>
+<button class="card tile a" style="--d:9" data-go="umpires"><span class="tnum">08</span><h3>Umpire</h3></button>
+</div>
+</div>
+</section>
+
+<section class="slide" id="tournament">
+<div class="in">
+<div class="hd"><p class="sec a">01 · টুর্নামেন্ট ও দল</p><h2 class="a" style="--d:1">টুর্নামেন্ট এক নজরে</h2></div>
+<div class="g3 stats">
+<div class="card a" style="--d:2"><span class="big">১২</span><h3>দল</h3><div class="row"><button class="rule" data-r="1.1">Rule 1.1</button></div></div>
+<div class="card a" style="--d:3"><span class="big">২ দিন</span><h3>২৬–২৭ ডিসেম্বর, Harburg</h3><div class="row"><button class="rule" data-r="1.4">Rule 1.4</button></div></div>
+<div class="card a" style="--d:4"><span class="big">১০</span><h3>Over প্রতি Innings</h3><div class="row"><button class="rule" data-r="1.6">Rule 1.6</button></div></div>
+<div class="card a" style="--d:5"><span class="big">১৫</span><h3>Bat লম্বা Pitch (stump থেকে stump)</h3><div class="row"><button class="rule" data-r="1.5">Rule 1.5</button></div></div>
+<div class="card a" style="--d:6"><span class="big">৩</span><h3>Umpire প্রতি ম্যাচে, ১ জন Speed Umpire</h3><div class="row"><button class="rule" data-r="1.7,1.8">Rule 1.7–1.8</button></div></div>
+<div class="card a" style="--d:7"><span class="big">৬ ডিসে.</span><h3>Squad জমার শেষ দিন (TBA)</h3><div class="row"><button class="rule" data-r="1.3">Rule 1.3</button></div></div>
+</div>
+</div>
+</section>
+
+<section class="slide alt" id="teams">
+<div class="in">
+<div class="hd"><p class="sec a">01 · টুর্নামেন্ট ও দল</p><h2 class="a" style="--d:1">১২টি দল, registration-এর ক্রমে</h2><button class="rule a" style="--d:1" data-r="1.1">Rule 1.1</button></div>
+<div class="teams"><figure class="team a" style="--d:2"><img src="teams/Crick_Blasters.webp" alt="Crick Blasters logo" width="240" height="240"><figcaption><b>Crick Blasters</b><span>#1 · Hamburg</span><time>13 Nov · 11:57</time></figcaption></figure><figure class="team a" style="--d:3"><img src="teams/Frankfurter_Fire_Boys.webp" alt="Frankfurter Fire Boys logo" width="240" height="240"><figcaption><b>Frankfurter Fire Boys</b><span>#2 · Frankfurt am Main</span><time>13 Nov · 14:19</time></figcaption></figure><figure class="team a" style="--d:4"><img src="teams/Elite_Fusion.webp" alt="Elite Fusion logo" width="240" height="240"><figcaption><b>Elite Fusion</b><span>#3 · Hamburg</span><time>13 Nov · 14:20</time></figcaption></figure><figure class="team a" style="--d:5"><img src="teams/BD_Sportings_Darmstadt.webp" alt="BD Sportings Darmstadt logo" width="240" height="240"><figcaption><b>BD Sportings Darmstadt</b><span>#4 · Darmstadt</span><time>13 Nov · 14:21</time></figcaption></figure><figure class="team a" style="--d:6"><img src="teams/The_Phantoms.webp" alt="The Phantoms logo" width="240" height="240"><figcaption><b>The Phantoms</b><span>#5 · Hamburg</span><time>13 Nov · 14:22</time></figcaption></figure><figure class="team a" style="--d:7"><img src="teams/Banglar_Bagh.webp" alt="Banglar Bagh logo" width="240" height="240"><figcaption><b>Banglar Bagh</b><span>#6 · Magdeburg</span><time>13 Nov · 14:28</time></figcaption></figure><figure class="team a" style="--d:8"><img src="teams/Bremen_Knights.webp" alt="Bremen Knights logo" width="240" height="240"><figcaption><b>Bremen Knights</b><span>#7 · Bremen</span><time>13 Nov · 14:46</time></figcaption></figure><figure class="team a" style="--d:9"><img src="teams/Northern_Legends.webp" alt="Northern Legends logo" width="240" height="240"><figcaption><b>Northern Legends</b><span>#8 · Hamburg</span><time>13 Nov · 14:55</time></figcaption></figure><figure class="team a" style="--d:10"><img src="teams/TU_Brotherhood.webp" alt="TU Brotherhood logo" width="240" height="240"><figcaption><b>TU Brotherhood</b><span>#9 · Hamburg</span><time>13 Nov · 15:00</time></figcaption></figure><figure class="team a" style="--d:11"><img src="teams/Harburg_Heatwaves.webp" alt="Harburg Heatwaves logo" width="240" height="240"><figcaption><b>Harburg Heatwaves</b><span>#10 · Hamburg</span><time>13 Nov · 15:04</time></figcaption></figure><figure class="team a" style="--d:12"><img src="teams/Chemnitz_Kingslayers.webp" alt="Chemnitz Kingslayers logo" width="240" height="240"><figcaption><b>Chemnitz Kingslayers</b><span>#11 · Chemnitz</span><time>13 Nov · 18:45</time></figcaption></figure><figure class="team a" style="--d:13"><img src="teams/SV_Tigers_AM_Main.webp" alt="SV Tigers AM Main logo" width="240" height="240"><figcaption><b>SV Tigers AM Main</b><span>#12 · Frankfurt</span><time>13 Nov · 20:50</time></figcaption></figure></div>
+</div>
+</section>
+
+<section class="slide" id="rush">
+<div class="in">
+<div class="hd"><p class="sec a">01 · টুর্নামেন্ট ও দল</p><h2 class="a" style="--d:1">Registration rush: ১৩ নভেম্বর</h2></div>
+<div class="split rushwrap">
+<div class="card a" style="--d:2">
+<div class="clockrow"><div><p class="soft">ঘড়ি</p><p class="clock" id="rClock">11:55:00</p></div><div style="text-align:right"><p class="soft">Slot ভরা</p><p class="clock"><span id="rCount">0</span><small>/12</small></p></div></div>
+<div class="slots" id="rSlots"></div>
+<div class="rctl"><button class="replay" id="rPlay">▶ Play</button><input type="range" id="rRange" min="0" max="12" step="1" value="0" aria-label="কতগুলো registration দেখাবে"><span class="soft" id="rLast">শুরু</span></div>
+</div>
+<div class="facts">
+<div class="fact a" style="--d:3"><span class="big">১৪ সে.</span><p>সবচেয়ে কম ব্যবধান: Frankfurter Fire Boys-এর পর Elite Fusion</p></div>
+<div class="fact a" style="--d:4"><span class="big">২ মিনিট</span><p>১৪:১৯ থেকে ১৪:২২, এর মধ্যে ৪টি দল</p></div>
+<div class="fact a" style="--d:5"><span class="big">৪৫ মিনিট</span><p>১৪:১৯:৫৭ থেকে ১৫:০৪:৫৭, ঠিক ৪৫ মিনিটে ৯টি দল</p></div>
+<div class="fact a" style="--d:6"><span class="big">১ দিন</span><p>১২টি slot একই দিনে পূর্ণ, ৬টি শহর থেকে</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="slide" id="squad">
+<div class="in">
+<div class="hd"><p class="sec a">01 · টুর্নামেন্ট ও দল</p><h2 class="a" style="--d:1">দল গঠন</h2></div>
+<div class="split">
+<div class="col a" style="--d:2">
+<div class="row" style="gap:clamp(12px,2vw,28px)"><div class="dots"><div class="dot">১</div><div class="dot">২</div><div class="dot">৩</div><div class="dot">৪</div><div class="dot">৫</div><div class="dot">৬</div><div class="dot">৭</div><div class="dot">৮</div><div class="dot">৯</div></div><span class="plus">+</span><div class="ssb">Super<br>Sub</div></div>
+<h3>মাঠে ৯ জন + ১ Super Sub <button class="rule" data-r="2.3">Rule 2.3</button></h3>
+</div>
+<div class="col">
+<div class="li a" style="--d:3"><span class="n">১</span><p>শুধু বাংলাদেশি খেলোয়াড় <button class="rule" data-r="2.1">Rule 2.1</button></p></div>
+<div class="li a" style="--d:4"><span class="n">২</span><p>Squad-এ কমপক্ষে ১০, সর্বোচ্চ ১২ জন <button class="rule" data-r="2.2">Rule 2.2</button></p></div>
+<div class="li a" style="--d:5"><span class="n">৩</span><p>সবার একই Jersey, সাদা বা প্রায় সাদা নয় <button class="rule" data-r="2.4,2.5">Rule 2.4–2.5</button></p></div>
+<div class="li a" style="--d:6"><span class="n">৪</span><p>Squad জমার পর কোনো পরিবর্তন নয় <button class="rule" data-r="2.6">Rule 2.6</button></p></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="slide" id="groups">
+<div class="in">
+<div class="hd"><p class="sec a">02 · Format</p><h2 class="a" style="--d:1">Group stage: সেরা ৪ দল Quarter-final-এ</h2></div>
+<div class="g3">
+<div class="grp a" style="--d:2"><h3>Group A</h3><div class="slot q"><b>A1</b>১ম</div><div class="slot q"><b>A2</b>২য়</div><div class="slot q"><b>A3</b>৩য়</div><div class="slot q"><b>A4</b>৪র্থ</div><div class="slot"><b>A5</b>৫ম · বিদায়</div><div class="slot"><b>A6</b>৬ষ্ঠ · বিদায়</div></div>
+<div class="grp a" style="--d:3"><h3>Group B</h3><div class="slot q"><b>B1</b>১ম</div><div class="slot q"><b>B2</b>২য়</div><div class="slot q"><b>B3</b>৩য়</div><div class="slot q"><b>B4</b>৪র্থ</div><div class="slot"><b>B5</b>৫ম · বিদায়</div><div class="slot"><b>B6</b>৬ষ্ঠ · বিদায়</div></div>
+<div class="col">
+<div class="card a" style="--d:4"><span class="big">৬ + ৬</span><p>দুই Group-এ ১২ দল <button class="rule" data-r="3.1">Rule 3.1</button></p></div>
+<div class="card a" style="--d:5"><span class="big">৪</span><p>ম্যাচ প্রতিটি দলের <button class="rule" data-r="3.2">Rule 3.2</button></p></div>
+<div class="card a" style="--d:6"><span class="big">৮</span><p>দল Knockout-এ <button class="rule" data-r="3.3">Rule 3.3</button></p></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="slide alt" id="knockout">
+<div class="in">
+<div class="hd"><p class="sec a">02 · Format</p><h2 class="a" style="--d:1">Knockout: Quarter-final থেকে Final</h2><button class="rule a" style="--d:1" data-r="3.3,3.4">Rule 3.3–3.4</button></div>
+<div class="br">
+<div class="brc a" style="--d:2"><p class="brh">Quarter-final</p>
+<div class="pair"><div class="m"><small>Q1</small><b>A1 vs B4</b></div><div class="m"><small>Q4</small><b>B2 vs A3</b></div></div>
+<div class="pair"><div class="m"><small>Q2</small><b>B1 vs A4</b></div><div class="m"><small>Q3</small><b>A2 vs B3</b></div></div>
+</div>
+<div class="brc a" style="--d:4"><p class="brh">Semi-final</p>
+<div class="pair sfcol"><div class="m"><small>SF1</small><b>Q1 vs Q4 জয়ী</b></div><div class="m"><small>SF2</small><b>Q2 vs Q3 জয়ী</b></div></div>
+</div>
+<div class="brc a" style="--d:6"><p class="brh">Final</p>
+<div style="flex:1;display:flex;align-items:center"><div class="m fin" style="width:100%"><small>Final</small><b>SF1 vs SF2 জয়ী</b></div></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="slide" id="batting">
+<div class="in">
+<div class="hd"><p class="sec a">03 · Batting ও Out</p><h2 class="a" style="--d:1">Batting-এর চার নিয়ম</h2></div>
+<div class="g2">
+<div class="card a" style="--d:2"><h3>LBW ছাড়া সব Out চলবে</h3><div class="row"><button class="rule" data-r="4.1">Rule 4.1</button></div></div>
+<div class="card a" style="--d:3"><h3>Over-boundary মারলে Out হতে পারে</h3><div class="row"><button class="rule" data-r="4.2">Rule 4.2</button></div></div>
+<div class="card a" style="--d:4"><h3>Bye ও Leg-bye রান নেই</h3><div class="row"><button class="rule" data-r="4.3">Rule 4.3</button></div></div>
+<div class="card a" style="--d:5"><h3>Overthrow রান চলবে</h3><div class="row"><button class="rule" data-r="4.4">Rule 4.4</button></div></div>
+</div>
+</div>
+</section>
+
+<section class="slide alt" id="runout">
+<div class="in">
+<div class="hd"><p class="sec a">03 · Batting ও Out</p><h2 class="a" style="--d:1">Stumping, নাকি Run Out?</h2><span class="tag a" style="--d:1">Clarified</span><button class="rule a" style="--d:1" data-r="8.7">Rule 8.7</button></div>
+<div class="col">
+<div class="card a" style="--d:2;border-style:dashed;border-color:var(--am)"><p>Batter crease-এর বাইরে, Wicketkeeper stump ভেঙে দিলেন।</p></div>
+<button class="reveal a" style="--d:3">উত্তর দেখুন</button>
+<div class="g2">
+<div class="card frag"><p class="soft">Batter রান নিতে দৌড়াচ্ছিলেন</p><p class="res">Run Out</p><p class="soft">Bat-এ লাগুক বা না লাগুক</p></div>
+<div class="card frag"><p class="soft">রান নিতে নয়, শুধু ball miss করে crease ছেড়েছিলেন</p><p class="res">Stumping</p></div>
+</div>
+<div class="row frag"><b>No-ball / Free Hit-এ:</b><span class="pill no">Stumping চলবে না</span><span class="pill ok">Run Out চলবে</span><button class="rule" data-r="8.5,8.6">Rule 8.5–8.6</button></div>
+</div>
+</div>
+</section>
+
+<section class="slide" id="bowling">
+<div class="in">
+<div class="hd"><p class="sec a">04 · Bowling ও No-ball</p><h2 class="a" style="--d:1">Bowling-এর তিন সংখ্যা</h2></div>
+<div class="col">
+<div class="g3">
+<div class="card a" style="--d:2"><span class="big">৩</span><h3>Over, একজন Bowler সর্বোচ্চ</h3><div class="row"><button class="rule" data-r="5.1">Rule 5.1</button></div></div>
+<div class="card a" style="--d:3"><span class="big">৫৮</span><h3>km/h সর্বোচ্চ গতি</h3><div class="row"><button class="rule" data-r="5.2">Rule 5.2</button></div></div>
+<div class="card a" style="--d:4"><span class="big">৯</span><h3>Fielder, মাঠে সর্বোচ্চ</h3><div class="row"><button class="rule" data-r="5.8">Rule 5.8</button></div></div>
+</div>
+<div class="gauge a" style="--d:6"><div class="a1">০–৫৮ km/h · Fair</div><div class="a2">৫৯+ · No-ball</div></div>
+<div class="row a" style="--d:7"><p class="soft">Speedometer reading-ই চূড়ান্ত</p><button class="rule" data-r="1.9,9.8">Rule 1.9 · 9.8</button></div>
+</div>
+</div>
+</section>
+
+<section class="slide alt" id="box">
+<div class="in">
+<div class="hd"><p class="sec a">04 · Bowling ও No-ball</p><h2 class="a" style="--d:1">Bowling box: পা কোথায় পড়বে</h2></div>
+<div class="split">
+<div class="a" style="--d:2">
+<div class="scene"><svg id="svgBox" viewBox="0 0 800 560" role="img" aria-label="Bowler-এর end থেকে দেখা Bowling box, stumps ও Popping crease; footprint দেখায় পা কোথায় পড়ছে"></svg><div class="stamp"></div></div>
+<div class="modes" data-scene="box"><button data-mode="fair" aria-pressed="true">Fair</button><button data-mode="side" aria-pressed="false">Side line ছুঁলে</button><button data-mode="back" aria-pressed="false">Back line ছুঁলে</button><button data-mode="over" aria-pressed="false">Overstep</button></div>
+</div>
+<div class="col">
+<div class="li a" style="--d:3"><span class="n">১</span><p>Action শুরু Starting line-এর ভেতর থেকে, বাইরে গেলে No-ball <button class="rule" data-r="5.3">Rule 5.3</button></p></div>
+<div class="li a" style="--d:4"><span class="n">২</span><p>Side line বা Back line ছুঁলে No-ball <button class="rule" data-r="5.5">Rule 5.5</button></p></div>
+<div class="li a" style="--d:5"><span class="n">৩</span><p>Popping crease-এ International overstepping নিয়ম <button class="rule" data-r="5.6">Rule 5.6</button></p></div>
+<div class="li a" style="--d:6"><span class="n">৪</span><p>Box-এর ভেতরে step-এর কোনো সীমা নেই <button class="rule" data-r="5.4">Rule 5.4</button></p></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="slide" id="action">
+<div class="in">
+<div class="hd"><p class="sec a">04 · Bowling ও No-ball</p><h2 class="a" style="--d:1">Bowling action: কোথা থেকে ball ছাড়বেন</h2><span class="tag a" style="--d:1">Clarified</span><button class="rule a" style="--d:1" data-r="5.7">Rule 5.7</button></div>
+<div class="split">
+<div class="a" style="--d:2">
+<div class="scene"><svg id="svgAct" viewBox="0 0 900 520" role="img" aria-label="Bowler-এর পাশ থেকে: মাথার ওপর থেকে কাঁধের উচ্চতা পর্যন্ত Fair zone; মাথার পেছনে ও কাঁধের নিচে No-ball; ডানে Batter">
+<rect width="900" height="520" fill="#0a0d10"/>
+<ellipse cx="450" cy="520" rx="520" ry="90" fill="#ff7a1a" opacity=".12"/>
+<rect x="0" y="480" width="900" height="40" fill="#0f2417"/>
+<rect x="110" y="476" width="770" height="8" rx="3" fill="#2d5a3a"/>
+<path d="M192 235 L192 65 A170 170 0 0 1 362 235 Z" fill="#3ddc5a" fill-opacity=".2" stroke="#3ddc5a" stroke-width="3"/>
+<path d="M192 235 L22 235 A170 170 0 0 1 192 65 Z" fill="#ff3b30" fill-opacity=".16"/>
+<path d="M192 235 L362 235 A170 170 0 0 1 277 382 Z" fill="#ff3b30" fill-opacity=".16"/>
+<line x1="12" y1="235" x2="420" y2="235" stroke="#c9c6bf" stroke-width="2.5" stroke-dasharray="10 8"/>
+<text x="232" y="112" fill="#3ddc5a" font-size="30" font-weight="800">Fair zone</text>
+<text x="34" y="150" fill="#ff6b61" font-size="22" font-weight="700">No-ball</text>
+<text x="34" y="176" fill="#c9c6bf" font-size="19">মাথার পেছনে</text>
+<text x="300" y="300" fill="#ff6b61" font-size="22" font-weight="700">No-ball</text>
+<text x="300" y="325" fill="#c9c6bf" font-size="19">কাঁধের নিচে</text>
+<text x="300" y="226" fill="#c9c6bf" font-size="18">কাঁধের উচ্চতা</text>
+<use href="#stumpsSide" transform="translate(842 480)"/>
+<g transform="translate(790 480)"><use href="#batterG"/><g id="actBat" transform="translate(-12 -150) rotate(20)"><use href="#batG"/></g></g>
+<g transform="translate(190 480)">
+<path d="M-6 -150 L-40 -80 L-66 -10" stroke="#ece6da" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<ellipse cx="-72" cy="-8" rx="22" ry="9" fill="#111"/>
+<path d="M10 -150 L46 -86 L72 -10" stroke="#ece6da" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<ellipse cx="80" cy="-8" rx="22" ry="9" fill="#111"/>
+<path d="M-22 -150 C-26 -190 -24 -232 -14 -254 L24 -258 C34 -228 32 -188 26 -150 Z" fill="#149a3c"/>
+<path d="M-23 -206 L29 -230 L30 -216 L-24 -192 Z" fill="#ff7a1a"/>
+<rect x="-4" y="-268" width="14" height="16" fill="#c68b5e"/>
+<circle cx="6" cy="-284" r="23" fill="#c68b5e"/>
+<path d="M-18 -290 C-16 -314 26 -316 30 -292 Z" fill="#149a3c"/>
+<path d="M24 -293 L50 -288 L48 -283 L24 -287 Z" fill="#0d6b29"/>
+<circle cx="18" cy="-282" r="2.5" fill="#111"/>
+<path d="M18 -246 L48 -270 L62 -302" stroke="#149a3c" stroke-width="15" stroke-linecap="round" fill="none"/>
+<circle cx="64" cy="-306" r="7" fill="#c68b5e"/>
+<g id="actArm" transform="rotate(-60 2 -245)"><path d="M2 -245 L46 -245" stroke="#149a3c" stroke-width="16" stroke-linecap="round"/><path d="M46 -245 L86 -256" stroke="#c68b5e" stroke-width="12" stroke-linecap="round"/><circle cx="90" cy="-257" r="8" fill="#c68b5e"/><circle id="actHeld" cx="96" cy="-258" r="9" fill="url(#ballg)"/></g>
+</g>
+<circle id="actBall" cx="-50" cy="-50" r="10" fill="url(#ballg)"/>
+<circle id="actRing" cx="-50" cy="-50" r="20" fill="none" stroke="#3ddc5a" stroke-width="5" opacity="0"/>
+</svg><div class="stamp"></div></div>
+<div class="modes" data-scene="act"><button data-mode="fair" aria-pressed="true">Fair</button><button data-mode="below" aria-pressed="false">কাঁধের নিচে</button><button data-mode="behind" aria-pressed="false">মাথার পেছনে</button></div>
+</div>
+<div class="col">
+<div class="card a" style="--d:3;border-color:#3ddc5a66"><span class="pill ok">Fair</span><p>Short pitch-এ হাত ভেঙে (elbow bend করে) bowling করা যাবে।</p><p>Ball ছাড়তে হবে <b>মাথার ওপর থেকে কাঁধের উচ্চতার</b> মধ্যে। কাঁধের রেখা ছুঁলেও Fair।</p></div>
+<div class="card a" style="--d:4;border-color:#ff3b3066"><span class="pill no">No-ball</span><div class="li"><span class="n">১</span><p>পুরো ball কাঁধের নিচ থেকে ছাড়লে</p></div><div class="li"><span class="n">২</span><p>মাথার পেছন থেকে ছাড়লে</p></div><div class="li"><span class="n">৩</span><p>Round-arm, Under-arm, Side-arm</p></div><p class="soft">কোনো warning ছাড়াই No-ball</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="slide alt" id="bounce">
+<div class="in">
+<div class="hd"><p class="sec a">04 · Bowling ও No-ball</p><h2 class="a" style="--d:1">Bounce কতটা উঁচু হলে No-ball</h2></div>
+<div class="split">
+<div class="a" style="--d:2">
+<div class="scene"><svg id="svgBnc" viewBox="0 0 900 520" role="img" aria-label="Batter-এর শরীরে Waist ও Chest উচ্চতা; ball bounce করে সেই উচ্চতায় আসে">
+<rect width="900" height="520" fill="#0a0d10"/>
+<ellipse cx="450" cy="520" rx="520" ry="90" fill="#3ddc5a" opacity=".08"/>
+<rect x="0" y="480" width="900" height="40" fill="#0f2417"/>
+<rect x="0" y="476" width="900" height="8" rx="3" fill="#2d5a3a"/>
+<line x1="0" y1="252" x2="900" y2="252" stroke="#ff3b30" stroke-width="4" stroke-dasharray="14 10"/>
+<line x1="0" y1="334" x2="900" y2="334" stroke="#ffb020" stroke-width="4" stroke-dasharray="14 10"/>
+<text x="20" y="240" fill="#ff6b61" font-size="30" font-weight="800">Chest</text>
+<text x="20" y="322" fill="#ffb020" font-size="30" font-weight="800">Waist</text>
+<use href="#stumpsSide" transform="translate(780 480) scale(1.15)"/>
+<g transform="translate(720 480) scale(1.05)"><use href="#batterG"/><g transform="translate(-12 -150) rotate(20)"><use href="#batG"/></g></g>
+<path id="bncTrail" d="" fill="none" stroke="#fffaf2" stroke-width="3" stroke-dasharray="6 8" opacity=".6"/>
+<circle id="bncBall" cx="660" cy="334" r="12" fill="url(#ballg)"/>
+<circle id="bncRing" cx="660" cy="334" r="24" fill="none" stroke="#ffb020" stroke-width="5" opacity="0"/>
+</svg><div class="stamp"></div></div>
+<div class="modes" data-scene="bnc"><button data-mode="w1" aria-pressed="true">Waist · ১ম বার</button><button data-mode="w2" aria-pressed="false">Waist · ২য় বার</button><button data-mode="chest" aria-pressed="false">Chest</button></div>
+</div>
+<div class="col">
+<div class="card a" style="--d:3;border-color:#ffb02066"><h3>Waist পর্যন্ত bounce</h3><div class="row"><span class="pill warn">১ম বার: Warning</span><span class="pill no">২য় বার: No-ball</span></div><div class="row"><button class="rule" data-r="8.1,8.2">Rule 8.1–8.2</button></div></div>
+<div class="card a" style="--d:4;border-color:#ff3b3066"><h3>Chest পর্যন্ত bounce</h3><div class="row"><span class="pill no">সরাসরি No-ball</span></div><div class="row"><button class="rule" data-r="8.3">Rule 8.3</button></div></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="slide" id="freehit">
+<div class="in">
+<div class="hd"><p class="sec a">04 · Bowling ও No-ball</p><h2 class="a" style="--d:1">No-ball মানেই Free Hit</h2></div>
+<div class="split" style="align-items:stretch">
+<div class="card a" style="--d:2"><h3>No-ball যখন</h3>
+<div class="g2" style="gap:12px 24px;margin-top:.4em">
+<div class="li"><span class="n">১</span><p>৫৯ km/h বা বেশি</p></div>
+<div class="li"><span class="n">২</span><p>Starting line-এর বাইরে শরীর</p></div>
+<div class="li"><span class="n">৩</span><p>Side বা Back line ছোঁয়া</p></div>
+<div class="li"><span class="n">৪</span><p>Overstepping</p></div>
+<div class="li"><span class="n">৫</span><p>কাঁধের নিচ বা মাথার পেছন থেকে release</p></div>
+<div class="li"><span class="n">৬</span><p>Round-arm, Under-arm, Side-arm</p></div>
+<div class="li"><span class="n">৭</span><p>Chest bounce, বা ২য় Waist bounce</p></div>
+<div class="li"><span class="n">৮</span><p>Wicketkeeper box-এর বাইরে</p></div>
+</div></div>
+<div class="card answer a" style="--d:4"><p class="res" style="font-size:var(--fs-big)">Free Hit</p><p>প্রতিটি No-ball-এর পর</p>
+<div class="col" style="margin-top:.6em"><span class="pill" style="background:#1b1208;color:#ff8a80">Stumping চলবে না</span><span class="pill" style="background:#1b1208;color:#7ff09a">Run Out চলবে</span></div>
+<div class="row" style="margin-top:auto"><button class="rule" style="color:#3b2408;border-color:#3b240866;background:#ffffff33" data-r="8.4,8.5,8.6">Rule 8.4–8.6</button></div></div>
+</div>
+</div>
+</section>
+
+<section class="slide alt" id="fielding">
+<div class="in">
+<div class="hd"><p class="sec a">05 · Fielding</p><h2 class="a" style="--d:1">Fielding-এর নিয়ম</h2></div>
+<div class="g3">
+<div class="card a" style="--d:2"><h3>শুধু Batter-এর দিকে এগোনো</h3><p class="soft">Ball ছাড়ার আগে পাশে সরে বিভ্রান্ত করা যাবে না</p><div class="row"><button class="rule" data-r="6.1">Rule 6.1</button></div></div>
+<div class="card a" style="--d:3"><h3>Wicketkeeper box-এর ভেতরে</h3><p class="soft">Ball ছাড়ার আগে বাইরে গেলে No-ball</p><div class="row"><button class="rule" data-r="6.2,6.3">Rule 6.2–6.3</button></div></div>
+<div class="card a" style="--d:4"><h3>Substitute fielder চলবে</h3><p class="soft">মাঠে সর্বোচ্চ ৯ জন</p><div class="row"><button class="rule" data-r="6.5,5.8">Rule 6.5 · 5.8</button></div></div>
+</div>
+</div>
+</section>
+
+<section class="slide" id="keeper">
+<div class="in">
+<div class="hd"><p class="sec a">05 · Fielding</p><h2 class="a" style="--d:1">Wicketkeeper box</h2><button class="rule a" style="--d:1" data-r="6.2,6.3">Rule 6.2–6.3</button></div>
+<div class="split">
+<div class="a" style="--d:2">
+<div class="scene"><svg id="svgKp" viewBox="0 0 800 560" role="img" aria-label="Wicketkeeper-এর পেছন থেকে দেখা: Keeper box, stumps, Batter ও দূরে Bowler"></svg><div class="stamp"></div></div>
+<div class="tl" aria-hidden="true"><b></b><i id="kpDot"></i></div>
+<div class="tll"><span>Ball release-এর আগে</span><span>Release</span><span>পরে</span></div>
+<div class="modes" data-scene="kp"><button data-mode="fair" aria-pressed="true">Release-এর পরে সরলেন</button><button data-mode="early" aria-pressed="false">Release-এর আগে সরলেন</button></div>
+</div>
+<div class="col">
+<div class="card a" style="--d:3;border-color:#3ddc5a66"><span class="pill ok">Fair</span><h3>Ball release পর্যন্ত পুরো শরীর box-এর ভেতরে</h3><p class="soft">Release-এর পরে সরা যাবে</p></div>
+<div class="card a" style="--d:4;border-color:#ff3b3066"><span class="pill no">No-ball</span><h3>Release-এর আগে শরীরের কোনো অংশ box-এর বাইরে</h3></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="slide alt" id="touch4">
+<div class="in">
+<div class="hd"><p class="sec a">05 · Fielding</p><h2 class="a" style="--d:1">Fielder ছুঁলেই 4</h2><span class="tag a" style="--d:1">Clarified</span><button class="rule a" style="--d:1" data-r="6.4">Rule 6.4</button></div>
+<div class="split">
+<div class="a" style="--d:2">
+<div class="scene"><svg id="svgF" viewBox="0 0 860 600" role="img" aria-label="Batter-এর মারা ball boundary-র আগে Fielder ছুঁয়ে দেন, তারপর ball boundary পার হয়">
+<rect width="860" height="600" fill="#0a0d10"/>
+<circle cx="430" cy="660" r="540" fill="#123020"/>
+<circle cx="430" cy="660" r="540" fill="none" stroke="#ffb020" stroke-width="5" stroke-dasharray="18 12"/>
+<rect x="412" y="430" width="36" height="150" rx="4" fill="#2d5a3a"/>
+<circle cx="430" cy="440" r="15" fill="#2b6fe0"/>
+<circle cx="630" cy="232" r="22" fill="#149a3c" stroke="#fffaf2" stroke-width="3"/>
+<path id="fTrail" d="M430 440 Q 530 300 630 232 L 720 60" fill="none" stroke="#fffaf2" stroke-width="4" stroke-dasharray="500" stroke-dashoffset="0"/>
+<circle id="fRing" cx="630" cy="232" r="34" fill="none" stroke="#ffb020" stroke-width="6" opacity=".8"/>
+<circle id="fBall" cx="720" cy="60" r="14" fill="url(#ballg)"/>
+<text x="458" y="452" fill="#7fb0ff" font-size="28" font-weight="700">Batter</text>
+<text x="560" y="292" fill="#fffaf2" font-size="28" font-weight="700">Fielder ছুঁলেন</text>
+<text x="60" y="210" fill="#ffb020" font-size="28" font-weight="700">Boundary</text>
+<text x="748" y="72" fill="#ffb020" font-size="44" font-weight="800">= 4</text>
+</svg></div>
+<div class="modes"><button class="replay" id="fReplay">আবার দেখুন</button></div>
+</div>
+<div class="col">
+<div class="li a" style="--d:3"><span class="n">১</span><p>Ball bat-এ লাগল</p></div>
+<div class="li a" style="--d:12"><span class="n">২</span><p>Boundary-র আগে Fielder ছুঁলেন</p></div>
+<div class="li a" style="--d:19"><span class="n">৩</span><p>তারপর ball boundary পার হলো</p></div>
+<button class="reveal a" style="--d:20">উত্তর দেখুন</button>
+<div class="card answer frag"><p class="res">4 রান · Not out</p><p>Bounce করে যাক বা full-এ, একই ফল</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="slide" id="supersub">
+<div class="in">
+<div class="hd"><p class="sec a">06 · Super Sub</p><h2 class="a" style="--d:1">Super Sub</h2></div>
+<div class="col">
+<div class="g3">
+<div class="card a" style="--d:2"><span class="n">১</span><h3>যেকোনো একজনের বদলে নামবেন, bat, ball, field সবই করবেন</h3><div class="row"><button class="rule" data-r="7.1">Rule 7.1</button></div></div>
+<div class="card a" style="--d:3"><span class="n">২</span><h3>যাঁর বদলে নামলেন, তিনি আর ফিরবেন না</h3><div class="row"><button class="rule" data-r="7.2">Rule 7.2</button></div></div>
+<div class="card a" style="--d:4"><span class="n">৩</span><h3>নামার পর Super Sub Playing Squad-এর অংশ</h3><div class="row"><button class="rule" data-r="7.3">Rule 7.3</button></div></div>
+</div>
+<div class="row a" style="--d:6;margin-top:.6em"><h3>Playing Squad কমপক্ষে ৫ Over মাঠে</h3><button class="rule" data-r="7.4">Rule 7.4</button></div>
+<div class="overs a" style="--d:7"><div class="ov sq"><b>১</b>Squad</div><div class="ov alt"><b>২</b>Sub</div><div class="ov sq"><b>৩</b>Squad</div><div class="ov sq"><b>৪</b>Squad</div><div class="ov alt"><b>৫</b>Sub</div><div class="ov alt"><b>৬</b>Sub</div><div class="ov sq"><b>৭</b>Squad</div><div class="ov sq"><b>৮</b>Squad</div><div class="ov alt"><b>৯</b>Sub</div><div class="ov alt"><b>১০</b>Sub</div></div>
+<p class="soft a" style="--d:8">উদাহরণ: যেকোনো ৫ Over হতে পারে। বাকি Over-এ Substitute fielder চলবে।</p>
+</div>
+</div>
+</section>
+
+<section class="slide alt" id="review">
+<div class="in">
+<div class="hd"><p class="sec a">07 · Review ও সময়</p><h2 class="a" style="--d:1">Review কে চাইবেন, কয়টি</h2></div>
+<div class="col">
+<div class="g2">
+<div class="card a" style="--d:2"><p class="soft">Batting-এর সময়</p><h3>শুধু wicket-এ থাকা Batter</h3><div class="row"><button class="rule" data-r="9.3">Rule 9.3</button></div></div>
+<div class="card a" style="--d:3"><p class="soft">Fielding-এর সময়</p><h3>Bowler বা Captain</h3><div class="row"><button class="rule" data-r="9.4">Rule 9.4</button></div></div>
+</div>
+<div class="g3">
+<div class="card a" style="--d:4"><span class="big">~১০</span><h3>সেকেন্ডের মধ্যে চাইতে হবে</h3></div>
+<div class="card a" style="--d:5"><span class="big">১</span><h3>Unsuccessful review প্রতি Innings</h3><div class="row"><button class="rule" data-r="9.1">Rule 9.1</button></div></div>
+<div class="card a" style="--d:6"><span class="big">∞</span><h3>Successful review</h3><div class="row"><button class="rule" data-r="9.2">Rule 9.2</button></div></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="slide" id="reviewhow">
+<div class="in">
+<div class="hd"><p class="sec a">07 · Review ও সময়</p><h2 class="a" style="--d:1">Review যেভাবে হবে</h2></div>
+<div class="col">
+<div class="g3">
+<div class="card a" style="--d:2"><span class="big">৩</span><h3>Umpire মিলে সিদ্ধান্ত</h3><div class="row"><button class="rule" data-r="9.5">Rule 9.5</button></div></div>
+<div class="card a" style="--d:3"><span class="big">৫</span><h3>মিনিটের মধ্যে শেষ</h3><div class="row"><button class="rule" data-r="9.7">Rule 9.7</button></div></div>
+<div class="card a" style="--d:4"><span class="big">✓</span><h3>চূড়ান্ত, Counter review নয়</h3><div class="row"><button class="rule" data-r="9.6">Rule 9.6</button></div></div>
+</div>
+<div class="card a" style="--d:6;border-color:#ff3b3066"><span class="pill no">Review চলবে না</span><div class="li"><span class="n">১</span><p>Speedometer reading <button class="rule" data-r="9.8">Rule 9.8</button></p></div><div class="li"><span class="n">২</span><p>Speedometer কাজ না করলে on-field Umpire-এর সিদ্ধান্তই চূড়ান্ত <button class="rule" data-r="9.10">Rule 9.10</button></p></div></div>
+</div>
+</div>
+</section>
+
+<section class="slide alt" id="time">
+<div class="in">
+<div class="hd"><p class="sec a">07 · Review ও সময়</p><h2 class="a" style="--d:1">২৫ মিনিটে ১০ Over</h2><button class="rule a" style="--d:1" data-r="10.1">Rule 10.1</button></div>
+<div class="col">
+<div class="tbar a" style="--d:2"><div class="tfill">Bowling দল · ২৫ মিনিট</div></div>
+<div class="g2">
+<div class="card a" style="--d:4"><p class="soft">Bowling দল দেরি করলে (১ম Innings)</p><h3>বাকি Over-এ ১ জন কম Fielder</h3><div class="row"><button class="rule" data-r="10.2">Rule 10.2</button></div></div>
+<div class="card a" style="--d:5"><p class="soft">Batting দল ইচ্ছা করে সময় নষ্ট করলে</p><h3>প্রতি বাড়তি মিনিটে ২ রান Penalty</h3><div class="row"><button class="rule" data-r="10.3">Rule 10.3</button></div></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="slide" id="umpires">
+<div class="in">
+<div class="hd"><p class="sec a">08 · Umpire</p><h2 class="a" style="--d:1">মাঠে Umpire-ই শেষ কথা</h2></div>
+<div class="g2">
+<div class="card a" style="--d:2"><h3>৩ Umpire, ১ জন Speed Umpire</h3><div class="row"><button class="rule" data-r="11.1,11.4">Rule 11.1 · 11.4</button></div></div>
+<div class="card a" style="--d:3"><h3>সিদ্ধান্ত চূড়ান্ত, শুধু Review-তে বদলাতে পারে</h3><div class="row"><button class="rule" data-r="11.2">Rule 11.2</button></div></div>
+<div class="card a" style="--d:4"><h3>তর্ক বা আগ্রাসী আচরণে শাস্তি</h3><div class="row"><button class="rule" data-r="11.3">Rule 11.3</button></div></div>
+<div class="card a" style="--d:5"><h3>প্রতি ম্যাচে Panel of Excellence থেকে অন্তত ১ জন</h3><div class="row"><button class="rule" data-r="11.5">Rule 11.5</button></div></div>
+</div>
+</div>
+</section>
+
+<section class="slide cover alt" id="end">
+<div class="in">
+<div>
+<h1 class="a" style="font-size:clamp(40px,5vw,104px);line-height:1.05"><span>আবেগ নিয়ে খেলুন, সম্মান নিয়ে জিতুন</span></h1>
+<p class="ctitle a" style="--d:1;font-size:clamp(20px,1.8vw,36px)">২৬–২৭ ডিসেম্বর ২০২৬ · Harburg, Hamburg</p>
+<p class="soft a" style="--d:2">Hamburg Sport Community · Organising Authority</p>
+</div>
+<div class="hero a" style="--d:1" role="img" aria-label="Indoor Cricket Blast logo"></div>
+</div>
+</section>
+
+<section class="slide" id="questions">
+<div class="in">
+<div class="hd"><p class="sec a">প্রশ্নোত্তর</p><h2 class="a" style="--d:1">প্রশ্ন আছে?</h2><p class="soft a" style="--d:1;flex-basis:100%">সাধারণ প্রশ্নগুলোর উত্তর এখানে। আরও প্রশ্ন থাকলে এখনই জিজ্ঞেস করুন।</p></div>
+<div class="faq"><details class="a" style="--d:2"><summary>Ball miss করে দৌড়ালাম, Keeper stump ভাঙলেন। Out?</summary><div class="ans"><span>হ্যাঁ, Run Out। Bat-এ লাগুক বা না লাগুক।</span><button class="rule" data-r="8.7">Rule 8.7</button></div></details><details class="a" style="--d:3"><summary>Fielder ছুঁয়ে দেওয়ার পর ball boundary পার হলে?</summary><div class="ans"><span>4 রান, Not out। Bounce হোক বা full।</span><button class="rule" data-r="6.4">Rule 6.4</button></div></details><details class="a" style="--d:4"><summary>Free Hit-এ Stumping হবে?</summary><div class="ans"><span>না। তবে Run Out হতে পারে।</span><button class="rule" data-r="8.5,8.6">Rule 8.5 · 8.6</button></div></details><details class="a" style="--d:5"><summary>Elbow bend করে bowling করা যাবে?</summary><div class="ans"><span>হ্যাঁ, যদি release মাথার ওপর থেকে কাঁধের উচ্চতার মধ্যে হয়।</span><button class="rule" data-r="5.7">Rule 5.7</button></div></details><details class="a" style="--d:6"><summary>Keeper কখন box ছাড়তে পারবেন?</summary><div class="ans"><span>Ball release-এর পরে। আগে ছাড়লে No-ball।</span><button class="rule" data-r="6.3">Rule 6.3</button></div></details><details class="a" style="--d:7"><summary>Speedometer reading নিয়ে Review করা যাবে?</summary><div class="ans"><span>না, reading-ই চূড়ান্ত।</span><button class="rule" data-r="9.8">Rule 9.8</button></div></details><details class="a" style="--d:8"><summary>Super Sub নামার পর বদলি খেলোয়াড় ফিরতে পারবেন?</summary><div class="ans"><span>না, তিনি আর এই ম্যাচে ফিরবেন না।</span><button class="rule" data-r="7.2">Rule 7.2</button></div></details><details class="a" style="--d:9"><summary>Waist সমান bounce প্রথমবার হলে কী হবে?</summary><div class="ans"><span>প্রথমবার Warning, দ্বিতীয়বার No-ball।</span><button class="rule" data-r="8.1,8.2">Rule 8.1 · 8.2</button></div></details></div>
+</div>
+</section>
+
+</main>
+
+<nav class="bar" aria-label="Slide navigation">
+<div class="prog" id="prog"></div>
+<div class="brand"><div class="badge" role="img" aria-label="Indoor Cricket Blast logo"></div><span>ICB 2026 · Official Rules</span></div>
+<button class="nb" id="prev" aria-label="আগের slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+<span class="cnt" id="cnt"></span>
+<button class="nb" id="next" aria-label="পরের slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></button>
+<button class="nb" id="fs" aria-label="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</nav>
+
+<div class="pop" id="pop" hidden><div class="pc" role="dialog" aria-modal="true" aria-labelledby="popt"><button class="x" id="popx" aria-label="বন্ধ করুন">×</button><p class="ps" id="pops">ICB 2026 Official Rulebook</p><h3 id="popt"></h3><div id="popb"></div></div></div>
+
+<script>
+{
+const SEC={1:'General Tournament Rules',2:'Team Formation & Squad Rules',3:'Group Stage & Knockout Format',4:'Batting Rules',5:'Bowling Rules',6:'Fielding Rules',7:'Super Sub & Substitution Rules',8:'No-Ball & Free-Hit Rules',9:'Review System',10:'Time Management & Penalties',11:'Umpires & Match Officials'};
+const R={
+'1.1':'A total of 12 teams will participate in the tournament.',
+'1.2':'The entry fee is €200 per team.',
+'1.3':'The final squad submission deadline is 6 December 2026 (TBA).',
+'1.4':'The tournament will take place on 26–27 December 2026 at Harburg.',
+'1.5':'The pitch length will be 15 bats, measured from stump to stump.',
+'1.6':'Every innings will consist of 10 overs throughout the tournament.',
+'1.7':'Each match will have three umpires, including one designated Speed Umpire.',
+'1.8':'All three umpires will collectively decide matters brought for review.',
+'1.9':'Speedometer readings will be final and binding.',
+'2.1':'Teams must consist exclusively of Bangladeshi players, regardless of their country, state or city of residence.',
+'2.2':'Each team must register a minimum of 10 and a maximum of 12 players.',
+'2.3':'The playing combination will be 9 players ( Playing Squad) plus 1 Super Sub (9+1).',
+'2.4':'All squad members must wear the same team jersey.',
+'2.5':'White or nearly white jerseys are not permitted.',
+'2.6':'Once the squad has been submitted, no further changes will be allowed.',
+'3.1':'The 12 teams will be divided into two groups of six teams each: Group A and Group B.',
+'3.2':'Each team will play four matches in the group stage, according to the official fixture.',
+'3.3':'The top four teams from each group will qualify for the knockout stage.\n\nQuarter-Final Fixtures\nQ1: A1 vs B4\nQ2: B1 vs A4\nQ3: A2 vs B3\nQ4: B2 vs A3\n\nSemi-Final Fixtures\n● Semi-Final 1: Winner of Q1 vs Winner of Q4.\n● Semi-Final 2: Winner of Q2 vs Winner of Q3.',
+'3.4':'The winners of both semi-finals will advance to the Final.',
+'4.1':'A batter can be dismissed through all recognised methods of cricket dismissal, except LBW.',
+'4.2':'Hitting an over-boundary can also result in the batter being dismissed.',
+'4.3':'Bye and Leg-Bye runs will not be awarded.',
+'4.4':'Overthrows will be allowed.',
+'5.1':'One bowler may bowl a maximum of three overs in an innings.',
+'5.2':'The maximum permitted bowling speed is 58 km/h. Any delivery recorded at 59 km/h or above will automatically be called a No-Ball.',
+'5.3':'Every bowler must start the bowling action from inside the designated starting line. If any part of the bowler’s body crosses outside this line, it will be a No-Ball.',
+'5.4':'There is no restriction on the number of steps a bowler can take within the designated bowling box.',
+'5.5':'If the bowler’s foot touches either the side line or back line of the designated bowling box, it will be a No-Ball.',
+'5.6':'International overstepping rules will apply.',
+'5.7':'Every delivery must be released at or above the bowler’s shoulder level.\n\nA. If the ball is released above the shoulder, or in line with it or middle or even touching the shoulder line , will be considered as fair delivery.\nB. A No-Ball will be called only when the ball is released entirely (100%) below the shoulder line.\nC. Round-arm, under arm and side arm delivery is prohibited, and will be considered as No-ball.\nD. NO warning is required for calling No-ball which is mentioned in Rule Book.',
+'5.8':'A maximum of nine fielders may be on the field at any time.',
+'6.1':'Before the ball is released, fielders may move only towards the batter. Lateral movements intended to distract the batter are not allowed.',
+'6.2':'A designated box will be marked for the wicketkeeper.',
+'6.3':'The wicketkeeper must remain completely inside the designated box until the ball is released. If any part of the body moves outside the box before release, it will be a No-Ball.',
+'6.4':'If a fielder touches the ball before it crosses the boundary, the delivery will be counted as a boundary.',
+'6.5':'Substitute fielders are permitted under tournament regulations.',
+'7.1':'A Super Sub may replace an existing player and can bat, bowl and field.',
+'7.2':'Once replaced, the original player cannot return to the match.',
+'7.3':'Once used, the Super Sub becomes part of the Playing Squad..',
+'7.4':'The Playing Squad, including the Super Sub, must remain in the field minimum of five overs. Rest five over substitute fielder can field. These Five overs can be any time during the 10 overs.',
+'8.1':'A delivery bouncing up to waist height will receive a first warning.',
+'8.2':'A second delivery bouncing up to waist height will be called a No-Ball.',
+'8.3':'Any delivery bouncing up to chest height will be called a No-Ball.',
+'8.4':'For any kind of No-Ball , batsman will be awarded a Free hit.',
+'8.5':'Stumping is not permitted on a No-Ball or Free Hit.',
+'8.6':'Run Out is still possible on a No-Ball or Free Hit.',
+'8.7':'If the batter attempts to run after the ball touches the bat, a dismissal will be treated as Run Out rather than Stumping.',
+'9.1':'Each team may use a maximum of one unsuccessful review against a dismissal decision in each innings ( one during batting and one during bowling).',
+'9.2':'Successful reviews are unlimited.',
+'9.3':'During batting Only batsman on the wicket can ask for review within approx. 10 sec after umpires decisions.',
+'9.4':'During Fielding Bowler or captain can ask for review within approx. 10 sec after umpires decisions.',
+'9.5':'All reviews will be assessed collectively by the three umpires.',
+'9.6':'Once a decision is made after review, counter review is not allowed.',
+'9.7':'Match officials must complete every review within five minutes.',
+'9.8':'Speedometer readings cannot be challenged or reviewed.',
+'9.10':'If the speedometer fails to determine the ball’s speed, the on-field umpire will make the final decision. No review will be allowed in this situation.',
+'10.1':'The bowling team must complete its 10 overs within 25 minutes.',
+'10.2':'If the bowling team fails to complete its 10 overs within 25 minutes during the first innings, it must field with one fewer fielder for the remaining overs.',
+'10.3':'If the batting team deliberately wastes time and causes the bowling team to exceed the 25-minute limit, the batting team will be penalised. The penalty will be two runs for every additional minute caused by the batting team’s time-wasting.',
+'11.1':'Each match will be supervised by three umpires, including one Speed Umpire.',
+'11.2':'Umpires are the highest authority on the field. Their decisions are final, subject to the review provisions in this Rulebook.',
+'11.3':'All teams and players must respect the umpires’ decisions. Unacceptable Arguments/ aggressiveness against their decisions will lead to disciplinary action.',
+'11.4':'The Speed Umpire will oversee speed monitoring. A valid speedometer reading is final.',
+'11.5':'Panel of Excellence\nTo ensure high-quality match management and professional officiating standards, ICB 2026 will establish a Panel of Excellence.\nThe Panel of Excellence will consist of highly experienced and professional umpires of Hamburg. In each match, there will be at least one umpire from the Panel of excellence.'
+};
+const CL={
+'6.4':'Once hit by the bat, if a fielder touches the ball and it crosses the boundary, it counts as a 4 regardless of whether the ball bounced on the ground first or went on the full. The batter is not out, even if it would otherwise have been an over-boundary.',
+'8.7':'If the batter is attempting a run when the wicketkeeper breaks the stumps, it is a Run Out, whether or not the ball touched the bat. Stumping applies only when the batter is out of the crease without attempting a run.',
+'5.7':'Short pitch: the bowler may bend the elbow (throwing action allowed). The ball must be released between the top of the head and shoulder height. Release from behind the head is a No-Ball.'
+};
+
+const NS='http://www.w3.org/2000/svg';
+const mk=(tag,at,par)=>{const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);if(par)par.appendChild(e);return e};
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let token=0;
+const X='x';
+const sleep=(ms,tk)=>new Promise((res,rej)=>setTimeout(()=>tk===token?res():rej(X),RM?0:ms));
+const tween=(ms,fn,tk,ease)=>new Promise((res,rej)=>{if(RM){fn(1);return res()}const t0=performance.now();const st=now=>{if(tk!==token)return rej(X);const t=Math.max(0,Math.min(1,(now-t0)/ms));fn(ease?ease(t):t);t<1?requestAnimationFrame(st):res()};requestAnimationFrame(st)});
+const eio=t=>t<.5?2*t*t:1-((-2*t+2)**2)/2, ein=t=>t*t, eout=t=>1-(1-t)*(1-t);
+const L=(a,b,t)=>a+(b-a)*t;
+function stamp(scene,txt,cls){const s=scene.querySelector('.stamp');s.className='stamp';if(!txt)return;s.textContent=txt;void s.offsetWidth;s.className='stamp show '+cls}
+
+/* ---------- perspective helper ---------- */
+function persp(o){return{P:(x,z,h)=>{const k=o.s/(z+o.d);return[o.cx+x*k,o.hy+o.H/(z+o.d)-(h||0)*k]},K:z=>o.s/(z+o.d),F:z=>o.H/(o.s*(z+o.d))}}
+function quad(g,pp,pts,fill,extra){const d=pts.map((p,i)=>(i?'L':'M')+pp.P(p[0],p[1]).join(' ')).join('')+'Z';return mk('path',Object.assign({d,fill},extra||{}),g)}
+function lineZ(g,pp,x1,x2,z,w,fill){return quad(g,pp,[[x1,z-w/2],[x2,z-w/2],[x2,z+w/2],[x1,z+w/2]],fill)}
+function lineX(g,pp,x,z1,z2,w,fill){return quad(g,pp,[[x-w/2,z1],[x+w/2,z1],[x+w/2,z2],[x-w/2,z2]],fill)}
+function stumps(g,pp,z,gap){for(const x of [-gap,0,gap]){const [bx,by]=pp.P(x,z);const k=pp.K(z);const w=Math.max(3,.045*k),h=.71*k;mk('rect',{x:bx-w/2,y:by-h,width:w,height:h,rx:w/3,fill:'#e8c98a'},g);mk('rect',{x:bx-w/2,y:by-h,width:w/3,height:h,fill:'#f6e2b4'},g)}const [lx,ly]=pp.P(-gap,z),[rx]=pp.P(gap,z);const k=pp.K(z);mk('rect',{x:lx-3,y:ly-.71*k-Math.max(3,.03*k),width:rx-lx+6,height:Math.max(3,.03*k),rx:2,fill:'#ffb020'},g)}
+function footprint(g,pp,x,z,cls){const [px,py]=pp.P(x,z);const k=pp.K(z),f=pp.F(z);const e=mk('g',{class:'fp '+(cls||''),transform:`translate(${px} ${py})`,opacity:0},g);mk('ellipse',{cx:0,cy:-.045*k*f,rx:.055*k,ry:.1*k*f},e);mk('ellipse',{cx:0,cy:.1*k*f,rx:.042*k,ry:.05*k*f},e);return e}
+function ground(svg,pp,W,Hh,zfar,glow){
+  const df=mk('defs',{},svg);const lg=mk('linearGradient',{id:svg.id+'g',x1:0,y1:0,x2:0,y2:1},df);mk('stop',{offset:0,'stop-color':'#0a0d10'},lg);mk('stop',{offset:1,'stop-color':'#12161b'},lg);
+  const tg=mk('linearGradient',{id:svg.id+'t',x1:0,y1:0,x2:0,y2:1},df);mk('stop',{offset:0,'stop-color':'#0e2416'},tg);mk('stop',{offset:1,'stop-color':'#16402a'},tg);
+  mk('rect',{width:W,height:Hh,fill:`url(#${svg.id}g)`},svg);
+  const hz=pp.P(0,zfar)[1];
+  for(const lx of [W*.12,W*.88]){mk('circle',{cx:lx,cy:hz-90,r:60,fill:'#ffb020',opacity:.08},svg);mk('circle',{cx:lx,cy:hz-90,r:16,fill:'#fff3d6',opacity:.55},svg)}
+  mk('rect',{x:0,y:hz,width:W,height:Hh-hz,fill:`url(#${svg.id}t)`},svg);
+  mk('ellipse',{cx:W/2,cy:Hh,rx:W*.6,ry:90,fill:glow,opacity:.12},svg);
+}
+
+/* ---------- Bowling box scene ---------- */
+const BOX={};
+{
+ const svg=document.getElementById('svgBox');const W=800,Hh=560;
+ const pp=persp({cx:400,hy:64,H:1120,s:640,d:2.4});BOX.pp=pp;
+ ground(svg,pp,W,Hh,15,'#ff7a1a');
+ const g=mk('g',{},svg);
+ quad(g,pp,[[-1.05,0],[1.05,0],[1.05,15],[-1.05,15]],'#1f4a31');
+ quad(g,pp,[[-1.25,0],[1.25,0],[1.25,3],[-1.25,3]],'#ffffff',{opacity:.04});
+ lineZ(g,pp,-1.6,1.6,3,.07,'#fffaf2');
+ lineZ(g,pp,-1.3,1.3,1.78,.04,'#fffaf2aa');
+ lineZ(g,pp,-1.28,1.28,0,.08,'#ff3b30');
+ lineX(g,pp,-1.25,0,3,.08,'#ff3b30');lineX(g,pp,1.25,0,3,.08,'#ff3b30');
+ lineZ(g,pp,-1.6,1.6,13.4,.06,'#fffaf2');
+ stumps(g,pp,14.6,.11);
+ const [bx,by]=pp.P(-.3,13.9);const bk=pp.K(13.9)*.0062;
+ const bt=mk('g',{transform:`translate(${bx} ${by}) scale(${bk})`},g);mk('use',{href:'#batterG'},bt);const bb=mk('g',{transform:'translate(-12 -150) rotate(20)'},bt);mk('use',{href:'#batG'},bb);
+ BOX.fp=mk('g',{},g);
+ stumps(g,pp,1.78,.11);
+ const lab=(t,x,z,col,anchor,dy)=>{const [lx,ly]=pp.P(x,z);mk('text',{x:lx,y:ly+(dy||0),fill:col,'font-size':22,'font-weight':700,'text-anchor':anchor||'middle'},g).textContent=t};
+ lab('Popping crease',1.65,3,'#fffaf2','start',8);
+ lab('Back line',0,0,'#ff6b61','middle',30);
+ lab('Side line',-1.32,1,'#ff6b61','end');lab('Side line',1.32,1,'#ff6b61','start');
+ lab('Stumps',-.25,1.78,'#ffcf7a','end',-60);
+ BOX.ball=mk('circle',{r:0,fill:'url(#ballg)',cx:-50,cy:-50},g);
+ BOX.svg=svg;BOX.scene=svg.closest('.scene');
+}
+const BOXSTEPS={
+ fair:{steps:[[.45,.35],[.78,.85],[.5,1.35],[.82,1.92],[.55,2.42],[.72,2.9,'good']],txt:'Fair: front foot-এর অংশ crease-এর পেছনে',cls:'ok',ball:1},
+ side:{steps:[[.45,.35],[.8,.85],[.98,1.35],[1.22,1.88,'bad']],txt:'No-ball: Side line ছুঁয়েছে · Rule 5.5',cls:'no'},
+ back:{steps:[[.55,.02,'bad']],txt:'No-ball: Back line ছুঁয়েছে · Rule 5.5',cls:'no'},
+ over:{steps:[[.45,.35],[.78,.85],[.5,1.35],[.82,1.92],[.55,2.45],[.72,3.24,'bad']],txt:'No-ball: পুরো পা crease-এর বাইরে · Rule 5.6',cls:'no'}
+};
+async function runBox(mode,tk){
+ const c=BOXSTEPS[mode];BOX.fp.textContent='';stamp(BOX.scene);BOX.ball.setAttribute('r',0);
+ await sleep(350,tk);
+ for(const [x,z,cls] of c.steps){const e=footprint(BOX.fp,BOX.pp,x,z,cls);await tween(260,t=>{e.setAttribute('opacity',t*.95)},tk);if(cls){const [px,py]=BOX.pp.P(x,z);const r=mk('circle',{cx:px,cy:py,r:10,fill:'none',stroke:cls==='bad'?'#ff3b30':'#3ddc5a','stroke-width':4},BOX.fp);await tween(500,t=>{r.setAttribute('r',10+28*t);r.setAttribute('opacity',1-t*.6)},tk,eout)}else await sleep(140,tk)}
+ stamp(BOX.scene,c.txt,c.cls);
+ if(c.ball){const pp=BOX.pp;await sleep(250,tk);await tween(1100,t=>{let x,z,h;if(t<.7){const u=t/.7;x=L(.5,.05,u);z=L(3,10.5,u);h=L(2.1,0,u*u)}else{const u=(t-.7)/.3;x=L(.05,-.12,u);z=L(10.5,13.6,u);h=Math.sin(u*Math.PI*.6)*.8}const [px,py]=pp.P(x,z,h);BOX.ball.setAttribute('cx',px);BOX.ball.setAttribute('cy',py);BOX.ball.setAttribute('r',Math.max(2.5,.07*pp.K(z)))},tk)}
+}
+
+/* ---------- Keeper scene ---------- */
+const KP={};
+{
+ const svg=document.getElementById('svgKp');const W=800,Hh=560;
+ const pp=persp({cx:400,hy:96,H:860,s:560,d:2});KP.pp=pp;
+ ground(svg,pp,W,Hh,16,'#3ddc5a');
+ const g=mk('g',{},svg);
+ quad(g,pp,[[-1.05,0],[1.05,0],[1.05,16],[-1.05,16]],'#1f4a31');
+ quad(g,pp,[[-.7,.3],[.7,.3],[.7,1.35],[-.7,1.35]],'#ffffff',{opacity:.05});
+ lineZ(g,pp,-.72,.72,.3,.05,'#fffaf2');lineZ(g,pp,-.72,.72,1.35,.05,'#fffaf2');lineX(g,pp,-.7,.3,1.35,.05,'#fffaf2');lineX(g,pp,.7,.3,1.35,.05,'#fffaf2');
+ lineZ(g,pp,-1.6,1.6,2.97,.05,'#fffaf2');lineZ(g,pp,-1.3,1.3,1.75,.035,'#fffaf2aa');
+ stumps(g,pp,15.6,.11);
+ KP.bowler=mk('g',{},g);
+ const bo=KP.bowler;mk('path',{d:'M0 0 L-10 -40 M0 0 L10 -40',stroke:'#ece6da','stroke-width':10,'stroke-linecap':'round'},bo);mk('path',{d:'M-14 -40 L14 -40 L12 -95 L-12 -95 Z',fill:'#149a3c'},bo);mk('circle',{cx:0,cy:-108,r:12,fill:'#c68b5e'},bo);KP.bArm=mk('path',{d:'M8 -90 L26 -120',stroke:'#149a3c','stroke-width':8,'stroke-linecap':'round'},bo);
+ stumps(g,pp,1.75,.11);
+ const [bx,by]=pp.P(-.55,2.75);const bk=pp.K(2.75)*.0062;const bt=mk('g',{transform:`translate(${bx} ${by}) scale(${bk})`},g);mk('use',{href:'#batterG'},bt);const bb=mk('g',{transform:'translate(-12 -150) rotate(20)'},bt);mk('use',{href:'#batG'},bb);
+ KP.fp=mk('g',{},g);
+ KP.k=mk('g',{},g);
+ const k=KP.k;
+ mk('path',{d:'M-22 0 L-34 -42 L-14 -66',stroke:'#f4f1ea','stroke-width':16,'stroke-linecap':'round','stroke-linejoin':'round',fill:'none'},k);
+ mk('path',{d:'M22 0 L34 -42 L14 -66',stroke:'#f4f1ea','stroke-width':16,'stroke-linecap':'round','stroke-linejoin':'round',fill:'none'},k);
+ mk('ellipse',{cx:-22,cy:2,rx:12,ry:5,fill:'#111'},k);mk('ellipse',{cx:22,cy:2,rx:12,ry:5,fill:'#111'},k);
+ mk('path',{d:'M-30 -60 C-34 -90 -24 -112 0 -112 C24 -112 34 -90 30 -60 Z',fill:'#149a3c'},k);
+ mk('path',{d:'M-30 -78 L30 -88 L30 -80 L-30 -70 Z',fill:'#ff7a1a'},k);
+ mk('text',{x:0,y:-84,'text-anchor':'middle','font-size':20,'font-weight':800,fill:'#fffaf2',style:'stroke:none'},k).textContent='7';
+ mk('path',{d:'M-24 -96 L-44 -70 M24 -96 L44 -70',stroke:'#149a3c','stroke-width':12,'stroke-linecap':'round'},k);
+ mk('ellipse',{cx:-46,cy:-66,rx:11,ry:13,fill:'#f4f1ea'},k);mk('ellipse',{cx:46,cy:-66,rx:11,ry:13,fill:'#f4f1ea'},k);
+ mk('circle',{cx:0,cy:-124,r:16,fill:'#10203d'},k);
+ mk('text',{x:0,y:0,fill:'#fffaf2','font-size':22,'font-weight':700,'text-anchor':'middle'},g);
+ const lab=(t,x,z,col,anchor,dy)=>{const [lx,ly]=pp.P(x,z);mk('text',{x:lx,y:ly+(dy||0),fill:col,'font-size':22,'font-weight':700,'text-anchor':anchor||'middle'},g).textContent=t};
+ lab('Keeper box',-.76,.6,'#fffaf2','end');lab('Bowler',.2,15.2,'#c9c6bf','start',-70);
+ KP.svg=svg;KP.scene=svg.closest('.scene');KP.dot=document.getElementById('kpDot');
+}
+function kpPose(dx){const pp=KP.pp;const z=.82;const [px,py]=pp.P(dx,z);const s=pp.K(z)*.0075;KP.k.setAttribute('transform',`translate(${px} ${py}) scale(${s})`)}
+function kpBowler(z,arm){const pp=KP.pp;const [px,py]=pp.P(.25,z);const s=pp.K(z)*.0105;KP.bowler.setAttribute('transform',`translate(${px} ${py}) scale(${s})`);KP.bArm.setAttribute('d',arm?'M8 -90 L4 -134':'M8 -90 L26 -120')}
+async function runKp(mode,tk){
+ KP.fp.textContent='';stamp(KP.scene);kpPose(0);kpBowler(21,0);KP.dot.style.left='0%';
+ for(const x of [-.2,.2]){footprint(KP.fp,KP.pp,x,.82).setAttribute('opacity',.85)}
+ await sleep(300,tk);
+ const early=mode==='early';
+ const move=async()=>{const e=footprint(KP.fp,KP.pp,.88,.85,early?'bad':'good');await tween(420,t=>{kpPose(L(0,.62,t));e.setAttribute('opacity',t)},tk,eio)};
+ await tween(1500,t=>{kpBowler(L(21,16.2,t),0);KP.dot.style.left=(t*45)+'%'},tk);
+ if(early){await move();const [px,py]=KP.pp.P(.88,.85);const r=mk('circle',{cx:px,cy:py,r:12,fill:'none',stroke:'#ff3b30','stroke-width':4},KP.fp);await tween(450,t=>{r.setAttribute('r',12+26*t)},tk,eout)}
+ await tween(400,t=>{KP.dot.style.left=(45+t*5)+'%';kpBowler(16.2,t>.3)},tk);
+ if(early){stamp(KP.scene,'No-ball: Release-এর আগে box-এর বাইরে · Rule 6.3','no');await tween(800,t=>{KP.dot.style.left=(50+t*40)+'%'},tk);return}
+ await sleep(200,tk);
+ await Promise.all([move(),tween(800,t=>{KP.dot.style.left=(50+t*40)+'%'},tk)]);
+ stamp(KP.scene,'Fair: Release-এর পরে সরেছেন','ok');
+}
+
+/* ---------- Bowling action scene ---------- */
+const ACT={svg:document.getElementById('svgAct')};
+ACT.scene=ACT.svg.closest('.scene');ACT.arm=document.getElementById('actArm');ACT.held=document.getElementById('actHeld');ACT.ball=document.getElementById('actBall');ACT.ring=document.getElementById('actRing');ACT.bat=document.getElementById('actBat');
+const armAt=a=>ACT.arm.setAttribute('transform',`rotate(${a} 2 -245)`);
+const batAt=a=>ACT.bat.setAttribute('transform',`translate(-12 -150) rotate(${a})`);
+function hand(a){const r=a*Math.PI/180,dx=94,dy=-13;return[192+dx*Math.cos(r)-dy*Math.sin(r),235+dx*Math.sin(r)+dy*Math.cos(r)]}
+const ACTM={fair:{a:-55,txt:'Fair: মাথার ওপর থেকে কাঁধের মধ্যে',cls:'ok',col:'#3ddc5a'},below:{a:28,txt:'No-ball: কাঁধের নিচ থেকে release',cls:'no',col:'#ff3b30'},behind:{a:-128,txt:'No-ball: মাথার পেছন থেকে release',cls:'no',col:'#ff3b30'}};
+async function runAct(mode,tk){
+ const m=ACTM[mode];stamp(ACT.scene);ACT.held.setAttribute('opacity',1);ACT.ball.setAttribute('cx',-50);ACT.ring.setAttribute('opacity',0);armAt(-225);batAt(20);
+ await sleep(400,tk);
+ const span=m.a+225;
+ tween(900,t=>batAt(L(20,-125,t)),tk,eio).catch(()=>{});
+ await tween(300+span*4.2,t=>armAt(L(-225,m.a,t)),tk,ein);
+ const R=hand(m.a);ACT.held.setAttribute('opacity',0);
+ ACT.ring.setAttribute('cx',R[0]);ACT.ring.setAttribute('cy',R[1]);ACT.ring.setAttribute('stroke',m.col);ACT.ring.setAttribute('opacity',1);
+ stamp(ACT.scene,m.txt,m.cls);
+ tween(450,t=>armAt(L(m.a,75,t)),tk,eout).catch(()=>{});
+ const B=[640,470],C=[770,402];
+ await tween(620,t=>{ACT.ball.setAttribute('cx',L(R[0],B[0],t));ACT.ball.setAttribute('cy',L(R[1],B[1],t**1.6))},tk);
+ tween(380,t=>batAt(L(-125,70,t)),tk,ein).catch(()=>{});
+ await tween(300,t=>{ACT.ball.setAttribute('cx',L(B[0],C[0],t));ACT.ball.setAttribute('cy',L(B[1],C[1],eout(t)))},tk);
+ await tween(700,t=>{ACT.ball.setAttribute('cx',L(C[0],380,t));ACT.ball.setAttribute('cy',L(C[1],-20,eout(t)))},tk);
+}
+
+/* ---------- Bounce scene ---------- */
+const BNC={svg:document.getElementById('svgBnc')};BNC.scene=BNC.svg.closest('.scene');BNC.ball=document.getElementById('bncBall');BNC.ring=document.getElementById('bncRing');BNC.trail=document.getElementById('bncTrail');
+const BNCM={w1:{y:334,txt:'Waist · ১ম বার → Warning · Rule 8.1',cls:'warn',col:'#ffb020'},w2:{y:334,txt:'Waist · ২য় বার → No-ball · Rule 8.2',cls:'no',col:'#ff3b30'},chest:{y:252,txt:'Chest → সরাসরি No-ball · Rule 8.3',cls:'no',col:'#ff3b30'}};
+async function runBnc(mode,tk){
+ const m=BNCM[mode];stamp(BNC.scene);BNC.ring.setAttribute('opacity',0);BNC.trail.setAttribute('d','');
+ const A=[-20,190],B=[360,474],C=[668,m.y];let d='';
+ await sleep(300,tk);
+ await tween(650,t=>{const x=L(A[0],B[0],t),y=L(A[1],B[1],t**1.5);BNC.ball.setAttribute('cx',x);BNC.ball.setAttribute('cy',y);d+=(d?'L':'M')+x.toFixed(1)+' '+y.toFixed(1);BNC.trail.setAttribute('d',d)},tk);
+ await tween(520,t=>{const x=L(B[0],C[0],t),y=L(B[1],C[1],eout(t));BNC.ball.setAttribute('cx',x);BNC.ball.setAttribute('cy',y);d+='L'+x.toFixed(1)+' '+y.toFixed(1);BNC.trail.setAttribute('d',d)},tk);
+ BNC.ring.setAttribute('cx',C[0]);BNC.ring.setAttribute('cy',C[1]);BNC.ring.setAttribute('stroke',m.col);
+ stamp(BNC.scene,m.txt,m.cls);
+ await tween(500,t=>{BNC.ring.setAttribute('r',14+22*t);BNC.ring.setAttribute('opacity',1-t*.3)},tk,eout);
+}
+
+/* ---------- Field 6.4 scene ---------- */
+const FLD={trail:document.getElementById('fTrail'),ring:document.getElementById('fRing'),ball:document.getElementById('fBall')};
+async function runF(mode,tk){
+ FLD.trail.setAttribute('stroke-dashoffset',500);FLD.ring.setAttribute('opacity',0);
+ const p=FLD.trail;const len=p.getTotalLength();
+ await sleep(300,tk);
+ let ringDone=false;
+ await tween(2200,t=>{const q=p.getPointAtLength(len*t);FLD.ball.setAttribute('cx',q.x);FLD.ball.setAttribute('cy',q.y);p.setAttribute('stroke-dashoffset',500*(1-t));if(t>.6&&!ringDone){ringDone=true;tween(450,u=>{FLD.ring.setAttribute('r',10+28*u);FLD.ring.setAttribute('opacity',u)},tk,eout).catch(()=>{})}},tk);
+}
+
+
+/* ---------- Registration rush ---------- */
+const REG=[["Crick Blasters", "Crick_Blasters", "Hamburg", "11:57:26"], ["Frankfurter Fire Boys", "Frankfurter_Fire_Boys", "Frankfurt am Main", "14:19:57"], ["Elite Fusion", "Elite_Fusion", "Hamburg", "14:20:11"], ["BD Sportings Darmstadt", "BD_Sportings_Darmstadt", "Darmstadt", "14:21:02"], ["The Phantoms", "The_Phantoms", "Hamburg", "14:22:02"], ["Banglar Bagh", "Banglar_Bagh", "Magdeburg", "14:28:23"], ["Bremen Knights", "Bremen_Knights", "Bremen", "14:46:13"], ["Northern Legends", "Northern_Legends", "Hamburg", "14:55:33"], ["TU Brotherhood", "TU_Brotherhood", "Hamburg", "15:00:48"], ["Harburg Heatwaves", "Harburg_Heatwaves", "Hamburg", "15:04:57"], ["Chemnitz Kingslayers", "Chemnitz_Kingslayers", "Chemnitz", "18:45:23"], ["SV Tigers AM Main", "SV_Tigers_AM_Main", "Frankfurt", "20:50:51"]];
+const RS={slots:document.getElementById('rSlots'),clock:document.getElementById('rClock'),count:document.getElementById('rCount'),range:document.getElementById('rRange'),play:document.getElementById('rPlay'),last:document.getElementById('rLast'),n:0};
+const sec=s=>{const [h,m,x]=s.split(':').map(Number);return h*3600+m*60+x};
+const fmt=v=>{v=Math.round(v);const h=Math.floor(v/3600),m=Math.floor(v%3600/60),x=v%60;return [h,m,x].map(n=>String(n).padStart(2,'0')).join(':')};
+REG.forEach((r,i)=>{const d=document.createElement('div');d.className='sl';d.textContent=String(i+1);const im=document.createElement('img');im.src='teams/'+r[1]+'.webp';im.alt=r[0];d.appendChild(im);RS.slots.appendChild(d)});
+function rushSet(n){RS.n=n;RS.range.value=n;[...RS.slots.children].forEach((d,i)=>d.classList.toggle('on',i<n));RS.count.textContent=n;RS.clock.textContent=n?REG[n-1][3]:'11:55:00';RS.last.textContent=n?REG[n-1][0]+' · '+REG[n-1][2]:'শুরু'}
+async function runRush(mode,tk){
+ rushSet(0);RS.play.textContent='▶ Play';
+ if(mode!=='play')return;
+ RS.play.textContent='⏸ Pause';
+ let t0=sec('11:55:00');
+ for(let i=0;i<REG.length;i++){const t1=sec(REG[i][3]);const gap=t1-t0;const ms=Math.max(450,Math.min(1600,gap*6));await tween(ms,u=>{RS.clock.textContent=fmt(L(t0,t1,u))},tk,eio);rushSet(i+1);t0=t1;await sleep(i>=1&&i<=4?180:320,tk)}
+ RS.play.textContent='↺ Replay';
+}
+RS.range.addEventListener('input',()=>{token++;RS.play.textContent='▶ Play';rushSet(+RS.range.value)});
+RS.play.addEventListener('click',()=>{if(RS.play.textContent.startsWith('⏸')){token++;RS.play.textContent='▶ Play';return}play('rush','play')});
+rushSet(0);
+
+const SCENES={rush:{run:runRush,def:'play'},box:{run:runBox,def:'fair'},keeper:{run:runKp,def:'fair'},action:{run:runAct,def:'fair'},bounce:{run:runBnc,def:'w1'},touch4:{run:runF,def:'play'}};
+const SCN={box:'box',kp:'keeper',act:'action',bnc:'bounce'};
+function play(id,mode){const s=SCENES[id];if(!s)return;const tk=++token;const sl=document.getElementById(id);sl.querySelectorAll('.modes[data-scene] button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===mode?'true':'false'));s.run(mode,tk).catch(e=>{if(e!==X)console.error(e)})}
+for(const g of document.querySelectorAll('.modes[data-scene]'))for(const b of g.querySelectorAll('button'))b.addEventListener('click',()=>play(SCN[g.dataset.scene],b.dataset.mode));
+document.getElementById('fReplay').addEventListener('click',()=>play('touch4','play'));
+kpPose(0);kpBowler(16.2,0);armAt(-55);
+
+/* ---------- deck ---------- */
+const deck=document.getElementById('deck');
+const slides=[...deck.querySelectorAll('.slide')];
+const cnt=document.getElementById('cnt'),prog=document.getElementById('prog');
+const pop=document.getElementById('pop'),popt=document.getElementById('popt'),popb=document.getElementById('popb'),pops=document.getElementById('pops');
+let cur=-1;
+function activate(i){
+  if(i===cur)return;
+  if(cur>=0){slides[cur].classList.remove('on');slides[cur].querySelectorAll('.frag').forEach(f=>f.classList.remove('shown'))}
+  cur=i;const s=slides[i];token++;
+  void s.offsetWidth;s.classList.add('on');
+  if(SCENES[s.id])setTimeout(()=>{if(slides[cur]===s)play(s.id,SCENES[s.id].def)},450);
+  cnt.textContent=(i+1)+' / '+slides.length;
+  prog.style.width=((i+1)/slides.length*100)+'%';
+  try{history.replaceState(null,'','#'+s.id)}catch(e){}
+}
+const io=new IntersectionObserver(es=>{for(const e of es)if(e.isIntersecting)activate(slides.indexOf(e.target))},{root:deck,threshold:.6});
+slides.forEach(s=>io.observe(s));
+function go(n){n=Math.max(0,Math.min(slides.length-1,n));slides[n].scrollIntoView({behavior:RM?'auto':'smooth',inline:'start',block:'nearest'})}
+function show(f){f.classList.add('shown');const c=f.querySelector('[data-count]');if(c){const n=+c.dataset.count,tk=token;const bn=v=>String(v).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);tween(1400,t=>{c.textContent=bn(Math.round(n*t))},tk,eout).catch(()=>{c.textContent=bn(n)})}}
+function next(){const f=slides[cur]&&slides[cur].querySelector('.frag:not(.shown)');if(f){show(f);return}go(cur+1)}
+function prev(){go(cur-1)}
+document.getElementById('next').addEventListener('click',next);
+document.getElementById('prev').addEventListener('click',prev);
+document.getElementById('fs').addEventListener('click',()=>{try{if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen().catch(()=>{})}catch(e){}});
+for(const b of document.querySelectorAll('.reveal'))b.addEventListener('click',()=>{const f=b.closest('.slide').querySelector('.frag:not(.shown)');if(f)show(f)});
+for(const t of document.querySelectorAll('[data-go]'))t.addEventListener('click',()=>{const n=slides.findIndex(s=>s.id===t.dataset.go);if(n>=0)go(n)});
+function openRule(keys){
+  popt.textContent=keys.length>1?'Rule '+keys[0]+' – '+keys[keys.length-1]:'Rule '+keys[0];
+  const sn=keys[0].split('.')[0];pops.textContent='ICB 2026 Rulebook · '+sn+'. '+SEC[sn];
+  popb.textContent='';
+  for(const k of keys){
+    const p=document.createElement('p');p.className='rt';p.textContent=(keys.length>1?k+'  ':'')+(R[k]||'');popb.appendChild(p);
+    if(CL[k]){const d=document.createElement('div');d.className='cl';const b=document.createElement('b');b.textContent='Clarified by organisers';const q=document.createElement('p');q.className='rt';q.textContent=CL[k];d.append(b,q);popb.appendChild(d)}
+  }
+  pop.hidden=false;document.getElementById('popx').focus();
+}
+function closeRule(){pop.hidden=true}
+for(const b of document.querySelectorAll('button.rule'))b.addEventListener('click',e=>{e.stopPropagation();openRule(b.dataset.r.split(','))});
+document.getElementById('popx').addEventListener('click',closeRule);
+pop.addEventListener('click',e=>{if(e.target===pop)closeRule()});
+document.addEventListener('keydown',e=>{
+  if(!pop.hidden){if(e.key==='Escape')closeRule();return}
+  if(e.target.closest&&e.target.closest('.modes')&&(e.key===' '||e.key==='Enter'))return;
+  if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();next()}
+  else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev()}
+  else if(e.key==='Home'){go(0)}else if(e.key==='End'){go(slides.length-1)}
+  else if(e.key==='f'){document.getElementById('fs').click()}
+});
+const h=location.hash.slice(1);const hi=slides.findIndex(s=>s.id===h);
+if(hi>0){deck.style.scrollBehavior='auto';slides[hi].scrollIntoView({inline:'start',block:'nearest'});deck.style.scrollBehavior=''}
+requestAnimationFrame(()=>{if(cur<0)activate(Math.max(0,hi))});
+}
+</script>
+</body>
+</html>
