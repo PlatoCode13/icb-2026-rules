@@ -905,17 +905,16 @@ ACT.scene=ACT.svg.closest('.scene');ACT.arm=document.getElementById('actArm');AC
 const armAt=a=>ACT.arm.setAttribute('transform',`rotate(${a} 2 -245)`);
 const batAt=a=>ACT.bat.setAttribute('transform',`translate(-12 -150) rotate(${a})`);
 function hand(a){const r=a*Math.PI/180,dx=94,dy=-13;return[192+dx*Math.cos(r)-dy*Math.sin(r),235+dx*Math.sin(r)+dy*Math.cos(r)]}
-const ACTM={fair:{a:-55,txt:'Fair: মাথার ওপর থেকে কাঁধের মধ্যে',cls:'ok',col:'#3ddc5a'},below:{a:28,txt:'No-ball: কাঁধের নিচ থেকে release',cls:'no',col:'#ff3b30'},behind:{a:-128,txt:'No-ball: মাথার পেছন থেকে release',cls:'no',col:'#ff3b30'}};
+const ACTM={fair:{s:-90,a:-50,e:-12,txt:'Fair: মাথার ওপর থেকে কাঁধের মধ্যে',cls:'ok',col:'#3ddc5a'},below:{s:-90,a:28,e:50,txt:'No-ball: কাঁধের নিচ থেকে release',cls:'no',col:'#ff3b30'},behind:{s:-175,a:-128,e:-108,txt:'No-ball: মাথার পেছন থেকে release',cls:'no',col:'#ff3b30'}};
 async function runAct(mode,tk){
- const m=ACTM[mode];stamp(ACT.scene);ACT.held.setAttribute('opacity',1);ACT.ball.setAttribute('cx',-50);ACT.ring.setAttribute('opacity',0);armAt(-225);batAt(20);
- await sleep(400,tk);
- const span=m.a+225;
+ const m=ACTM[mode];stamp(ACT.scene);ACT.held.setAttribute('opacity',1);ACT.ball.setAttribute('cx',-50);ACT.ring.setAttribute('opacity',0);armAt(m.s);batAt(20);
+ await sleep(500,tk);
  tween(900,t=>batAt(L(20,-125,t)),tk,eio).catch(()=>{});
- await tween(300+span*4.2,t=>armAt(L(-225,m.a,t)),tk,ein);
+ await tween(500+Math.abs(m.a-m.s)*5,t=>armAt(L(m.s,m.a,t)),tk,eio);
  const R=hand(m.a);ACT.held.setAttribute('opacity',0);
  ACT.ring.setAttribute('cx',R[0]);ACT.ring.setAttribute('cy',R[1]);ACT.ring.setAttribute('stroke',m.col);ACT.ring.setAttribute('opacity',1);
  stamp(ACT.scene,m.txt,m.cls);
- tween(450,t=>armAt(L(m.a,75,t)),tk,eout).catch(()=>{});
+ tween(400,t=>armAt(L(m.a,m.e,t)),tk,eout).catch(()=>{});
  const B=[640,470],C=[770,402];
  await tween(620,t=>{ACT.ball.setAttribute('cx',L(R[0],B[0],t));ACT.ball.setAttribute('cy',L(R[1],B[1],t**1.6))},tk);
  tween(380,t=>batAt(L(-125,70,t)),tk,ein).catch(()=>{});
